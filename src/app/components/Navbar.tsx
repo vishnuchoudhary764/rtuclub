@@ -1,6 +1,6 @@
 "use client";
 import Link from 'next/link'
-import Image from 'next/image';
+
 import { usePathname } from "next/navigation";
 import { useState,useEffect } from 'react';
 const Navbar = () => {
@@ -17,8 +17,8 @@ const Navbar = () => {
     <div className='flex justify-evenly flex-col lg:flex-row p-5 gap-6 lg:gap-0 mb-5  '>
       <Link href="https://www.instagram.com/sac.rtu/?hl=en">
       <div className='flex flex-col items-center lg:flex-row  gap-4'>
-          {/* <img  className='rounded-full lg:w-20 lg:h-20 h-25 w-25 ' src="sac.jpeg" alt="" /> */}
-          <Image className='rounded-full lg:w-20 lg:h-20 h-25 w-25 ' src="sac.jpeg" alt=""></Image>
+          <img  className='rounded-full lg:w-20 lg:h-20 h-25 w-25 ' src="sac.jpeg" alt="" />
+        
         <p className='font-extrabold text-2xl tracking-widest'>SAC RTU</p>
              
       </div>
@@ -48,8 +48,8 @@ const Navbar = () => {
         <Link  className={pathname === "/profile" ? "border-2 rounded-4xl p-1.5 border-blue-500":""} href={ "/profile"}>
         
     
-        {/* <img  width={22} height={22} src="profile.png" alt="" /> */}
-        <Image  width={22} height={22} src="profile.png" alt="" ></Image>
+        <img  width={22} height={22} src="profile.png" alt="" />
+       
         </Link>
         
 

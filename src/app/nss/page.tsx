@@ -17,8 +17,8 @@ const page = () => {
         </p>
 
         
-        {/* < img className='m-auto rounded-xl shadow hover:scale-95 transition' src="nss.jpeg" alt="NSS" /> */}
-        <Image className='m-auto rounded-xl shadow hover:scale-95 transition' src="nss.jpeg" alt="NSS"></Image>
+        < img className='m-auto rounded-xl shadow hover:scale-95 transition' src="nss.jpeg" alt="NSS" />
+        
 
         <p className='text-gray-700 leading-relaxed text-justify'>
           We believe in the motto <span className='font-bold'>&quot;Not Me, But You&quot;</span>, encouraging every member
@@ -69,18 +69,13 @@ Image
         <div>
           <h2 className='text-2xl  font-semibold text-indigo-500 mb-3'>Photos</h2>
           <div className='flex flex-col p-4 lg:grid lg:grid-row-1 lg:m-0 sm:grid-cols-2 md:grid-cols-3 gap-6'>
-            {/* <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="delhitrophy.jpeg" alt="Trophy" />
+            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="delhitrophy.jpeg" alt="Trophy" />
             <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="corewp.jpeg" alt="Core Team" />
             <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="jnr.jpeg" alt="Junior Volunteers" />
             <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="rangoli.jpeg" alt="Rangoli Event" />
             <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="patelwjnr.jpeg" alt="Patel Event" />
-            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="news.jpeg" alt="News Coverage" /> */}
-            <Image className='rounded-xl opacity-85 hover:opacity-100 transition' src="delhitrophy.jpeg" alt="Trophy"/>
-            <Image className='rounded-xl opacity-85 hover:opacity-100 transition' src="corewp.jpeg" alt="Core Team"/>
-            <Image className='rounded-xl opacity-85 hover:opacity-100 transition' src="jnr.jpeg" alt="Junior Volunteers"/>
-            <Image  className='rounded-xl opacity-85 hover:opacity-100 transition' src="rangoli.jpeg" alt="Rangoli Event"/>
-            <Image className='rounded-xl opacity-85 hover:opacity-100 transition' src="patelwjnr.jpeg" alt="Patel Event"/>
-            <Image className='rounded-xl opacity-85 hover:opacity-100 transition' src="news.jpeg" alt="News Coverage"/>
+            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="news.jpeg" alt="News Coverage" />
+          
 
           </div>
         </div>

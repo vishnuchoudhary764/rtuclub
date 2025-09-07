@@ -73,15 +73,12 @@ export default function page() {
             key={club.id}
             className="bg-white rounded-2xl  shadow-lg hover:shadow-xl transition overflow-hidden"
           >
-            {/* <img height={20} width={50}
+            <img height={20} width={50}
               src={club.image}
               alt={club.name}
               className="w-full  p-4 object-cover object-center"
-            /> */}
-            <Image  height={20} width={50}
-              src={club.image}
-              alt={club.name}
-              className="w-full  p-4 object-cover object-center"></Image>
+            />
+          
             <div className="p-6 text-center">
               <h2 className="text-xl font-semibold">{club.name}</h2>
               <p className="text-gray-600 mt-2">{club.description}</p>
