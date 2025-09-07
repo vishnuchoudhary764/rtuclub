@@ -12,8 +12,8 @@ export default function page() {
           The Hunger No More (HNM) Club is a welfare foundation and club at
           <span className="font-semibold"> Rajasthan Technical University (RTU)</span> in Kota,
           focused on hunger relief and creating positive social impact. It was
-          introduced to RTU's 2025 batch during their induction program to inform
-          them about the club's vision, activities, and opportunities for
+          introduced to RTU&apos;s 2025 batch during their induction program to inform
+          them about the club&apos;s vision, activities, and opportunities for
           participation in its projects and events.
         </p>
 

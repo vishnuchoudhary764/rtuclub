@@ -1,5 +1,5 @@
 "use client"
-import { Calendar, MapPin, PlusCircle, Edit, Trash2 } from "lucide-react"
+import { Calendar, MapPin} from "lucide-react"
 
 import { useEffect, useState } from "react"
 
@@ -46,7 +46,7 @@ export default function EventsPage() {
             </div>
           ))
         ) : (
-          <h1 className="text-red-500 text-7xl text-center">No events found.</h1>
+          <h1 className="text-red-500 text-7xl text-center"></h1>
         )}
       </div>
 

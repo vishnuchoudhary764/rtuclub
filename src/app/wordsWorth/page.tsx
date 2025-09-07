@@ -9,7 +9,10 @@ export default function page() {
 
         {/* Intro */}
         <p className="text-gray-700 leading-relaxed text-justify">
-          The Wordsworth Club at <span className="font-semibold">Rajasthan Technical University (RTU)</span> is a club focused on student personality and communication skill development. It aims to improve members' verbal, non-verbal, and written communication through workshops, practice sessions, and events like debates, public speaking, and storytelling. The club also engages students in literary activities and supports their overall growth and creativity.
+          The Wordsworth Club at <span className="font-semibold">Rajasthan Technical University (RTU)</span> is a club focused on student
+           personality and communication skill development. It aims to improve members verbal, non-verbal, and written communication through
+            workshops, practice sessions, and events like debates, public speaking, and storytelling. The club also engages students in 
+            literary activities and supports their overall growth and creativity.
         </p>
 
         {/* Objectives */}
@@ -38,7 +41,7 @@ export default function page() {
               <ul className="list-disc list-inside ml-6 space-y-1">
                 <li><span className="font-semibold">Debates and Literary Discussions:</span> Enhancing critical thinking and verbal skills through discussions.</li>
                 <li><span className="font-semibold">Storytelling and Performances:</span> Spaces for members to share stories and talents.</li>
-                <li><span className="font-semibold">Special Theme Events:</span> Events around themes like Valentine's Day to encourage creativity and engagement.</li>
+                <li><span className="font-semibold">Special Theme Events:</span> Events around themes like Valentine&apos;s Day to encourage creativity and engagement.</li>
               </ul>
             </li>
             <li>

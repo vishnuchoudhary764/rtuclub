@@ -39,9 +39,9 @@ export default function CoordinatorDashboardPage() {
       .then((res) => res.json())
       .then((data) => setEvents(data))
   }, [])
- const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+//  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+//     setForm({ ...form, [e.target.name]: e.target.value })
+//   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -81,7 +81,7 @@ export default function CoordinatorDashboardPage() {
         </button>
       </div>
          {showForm && (
-        <div className="mt-10 w-170 p-6 rounded-xl shadow-lg duration-700 bg-green-700 transform fixed top-45 left-70">
+        <div className="mt-10 w-170 p-6 rounded-xl shadow-lg duration-700 bg-green-600 transform fixed top-45 left-70">
           <h2 className="text-2xl font-bold mb-4">Add New Event</h2>
           <form onSubmit={(e) => { e.preventDefault(), handleSubmit(e),setShowForm(false);  }} className="space-y-4">
             <input

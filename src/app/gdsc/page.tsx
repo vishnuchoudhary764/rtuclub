@@ -9,7 +9,12 @@ export default function page() {
 
         
         <p className="text-gray-700 leading-relaxed text-justify">
-          GDSC RTU is a university-based community at <span className="font-semibold">Rajasthan Technical University (RTU)</span> in Kota, India, that fosters peer-to-peer learning and skill development in Google developer technologies like web and mobile development, cloud, and machine learning. Led by students, the club organizes workshops, talks, and hackathons, and participates in Google's Solution Challenge, a global competition where students build technology solutions for community problems. The goal of GDSC RTU is to empower students to gain practical experience and enhance their employability by building both technical and soft skills in a collaborative environment.
+          GDSC RTU is a university-based community at <span className="font-semibold">Rajasthan Technical University (RTU)</span> in Kota,
+           India, that fosters peer-to-peer learning and skill development in Google developer technologies like web and mobile 
+           development, cloud, and machine learning. Led by students, the club organizes workshops, talks, and hackathons, 
+           and participates in Google&apos;s Solution Challenge, a global competition where students build technology solutions for
+            community problems. The goal of GDSC RTU is to empower students to gain practical experience and enhance their employability
+             by building both technical and soft skills in a collaborative environment.
         </p>
 
        
@@ -22,7 +27,7 @@ export default function page() {
             <li><span className="font-semibold">Community Engagement:</span> Apply technical knowledge to solve real-world community problems.</li>
             <li><span className="font-semibold">Global Connection:</span> Be part of a worldwide network of GDSC peers.</li>
             <li><span className="font-semibold">Events and Workshops:</span> Cover both basic and advanced development concepts.</li>
-            <li><span className="font-semibold">Solution Challenge:</span> Opportunity to participate in Google's Solution Challenge and showcase solutions.</li>
+            <li><span className="font-semibold">Solution Challenge:</span> Opportunity to participate in Google&apos;s Solution Challenge and showcase solutions.</li>
             <li><span className="font-semibold">Employability:</span> Improve career prospects through technical and soft skill growth.</li>
           </ul>
         </div>

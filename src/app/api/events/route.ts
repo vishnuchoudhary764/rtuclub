@@ -1,4 +1,4 @@
-import Events from '@/app/components/Events'
+
 import { query } from '../../../lib/db'
 
 

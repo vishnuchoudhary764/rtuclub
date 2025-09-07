@@ -23,10 +23,15 @@ export async function POST(req: Request) {
       [fullName, email, hashedPassword, role]
     );
 
+    // return new Response(
+    //   JSON.stringify({ message: "User registered successfully!", userId: result.insertId }),
+    //   { status: 201 }
+    // );
     return new Response(
-      JSON.stringify({ message: "User registered successfully!", userId: result.insertId }),
-      { status: 201 }
-    );
+  JSON.stringify({ message: "User registered successfully!", userId: result.insertId || result[0]?.insertId }),
+  { status: 201 }
+);
+
   } catch (error) {
     console.error(error);
     return new Response(JSON.stringify({ error: "Registration failed" }), { status: 500 });

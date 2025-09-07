@@ -1,10 +1,11 @@
 "use client"
 import React from 'react'
 import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import Image from 'next/image';
 
 
-const page = () => {
+
+export default function page(){
 
   const router = useRouter();
   return (
@@ -22,16 +23,19 @@ const page = () => {
             <p> This portal connects the entire campus community.</p>
             <div className='flex gap-8'>
               <button onClick={() => router.push("/clubs")} className='flex justify-center gap-4 mt-4 bg-white text-black rounded-2xl w-45 p-3'>Explore Clubs
-                <img src="right-arrow.png" height={20} width={20} alt="" />
+                {/* <img src="right-arrow.png" height={20} width={20} alt="" /> */}
+                <Image src="right-arrow.png" height={20} width={20}  alt="" />
               </button>
               <button onClick={() => router.push("/events")} className='flex gap-4  justify-center mt-4 bg-white text-black rounded-2xl w-40 p-3'>See Events
-                <img src="right-arrow.png" height={20} width={20} alt="" />
+                {/* <img src="right-arrow.png" height={20} width={20} alt="" /> */}
+                <Image  src="right-arrow.png" height={20} width={20} alt="" />
               </button>
             </div>
 
           </div>
 
-          <img className='rounded-2xl w-80 h-75' src="guys.png" alt="" />
+          {/* <img className='rounded-2xl w-80 h-75' src="guys.png" alt="" /> */}
+          <Image className='rounded-2xl w-80 h-75' src="guys.png" alt=""/>
         </div>
 
       </div>
@@ -42,4 +46,4 @@ const page = () => {
   )
 }
 
-export default page
+
