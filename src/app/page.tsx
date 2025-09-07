@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 
 
-export default function page(){
+export default function Page(){
 
   const router = useRouter();
   return (

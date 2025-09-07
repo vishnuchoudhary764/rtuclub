@@ -37,7 +37,7 @@ const page = () => {
             </li>
             <li>
               <h3 className='font-semibold'>Institutional Award</h3>
-              <p>The university received the "Institutional Award" for its exemplary community service initiatives,
+              <p>The university received the &quot;Institutional Award&quot; for its exemplary community service initiatives,
                 recognizing its social impact and leadership in fostering volunteerism.</p>
             </li>
             <li>

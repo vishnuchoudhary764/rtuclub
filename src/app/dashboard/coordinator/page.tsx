@@ -83,7 +83,10 @@ export default function CoordinatorDashboardPage() {
          {showForm && (
         <div className="mt-10 w-170 p-6 rounded-xl shadow-lg duration-700 bg-green-600 transform fixed top-45 left-70">
           <h2 className="text-2xl font-bold mb-4">Add New Event</h2>
-          <form onSubmit={(e) => { e.preventDefault(), handleSubmit(e),setShowForm(false);  }} className="space-y-4">
+          <form onSubmit={(e) => { e.preventDefault();
+            handleSubmit(e);
+            setShowForm(false);
+              }} className="space-y-4">
             <input
 
               type="text"

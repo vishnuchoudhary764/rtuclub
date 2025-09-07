@@ -18,7 +18,7 @@ export async function GET() {
 export async function POST(req: Request) {
   const body = await req.json()
   const { title, description, event_date, location, role } = body
-  const events =  await query("DELETE FROM events WHERE event_date < CURDATE()");
+  // const events =  await query("DELETE FROM events WHERE event_date < CURDATE()");
    
 
   try {
