@@ -39,9 +39,7 @@ export default function CoordinatorDashboardPage() {
       .then((res) => res.json())
       .then((data) => setEvents(data))
   }, [])
-//  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-//     setForm({ ...form, [e.target.name]: e.target.value })
-//   }
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -174,16 +172,15 @@ export default function CoordinatorDashboardPage() {
                   {ev.location}
                 </p>
                 <div className="flex gap-4 justify-start">
-                  <button className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-1 text-sm">
+                  <button   className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-1 text-sm">
                     <Edit className="w-4 h-4" /> Edit
                   </button>
-                  <button className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-1 text-sm">
+                  <button   className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-1 text-sm">
                     <Trash2 className="w-4 h-4" /> Delete
                   </button>
                 </div>
               </div>
-            ))}
-          </div>
+            ))}          </div>
         ) : (
           <p className="text-gray-500">No events created yet.</p>
         )}
