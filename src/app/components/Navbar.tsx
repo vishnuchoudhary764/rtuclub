@@ -14,7 +14,7 @@ const Navbar = () => {
     }
   }, [])
   return (
-    <div className='flex justify-evenly flex-col lg:flex-row p-5 gap-6 lg:gap-0 mb-5  '>
+    <div className='flex justify-evenly flex-col lg:flex-row p-5 gap-6 lg:gap-0 mb-5 bg-blue-200 md:bg-white '>
       <Link href="https://www.instagram.com/sac.rtu/?hl=en">
       <div className='flex flex-col items-center lg:flex-row  gap-4'>
           <img  className='rounded-full lg:w-20 lg:h-20 h-25 w-25 ' src="sac.jpeg" alt="" />

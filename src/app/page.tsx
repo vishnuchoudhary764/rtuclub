@@ -8,9 +8,10 @@ export default function Page(){
   return (
     <div>
       <div className='flex justify-center  p-1 h-full '>
-        <div className='flex flex-col lg:flex-row   items-center rounded-2xl lg:w-220 lg:h-100  text-black lg:bg-blue-500 gap-4 p-10 lg:text-white' >
+        <div className='flex flex-col lg:flex-row   items-center rounded-2xl lg:w-220 lg:h-100  text-black lg:bg-blue-500 
+          gap-4 pl-2 lg:text-white m-auto' >
           <div className='flex flex-col gap-5 p-2 overflow-hidden'>
-            <h1 className='text-4xl'>College Clubs & Events</h1>
+            <h1 className='text-4xl text-center'>College Clubs & Events</h1>
             <p>Our College Clubs & Events Portal is the one-stop platform for students to
               explore campus life. From cultural fests and technical workshops to social service drives and
               music nights.
