@@ -2,12 +2,12 @@ export default function page() {
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center items-center p-6">
       <div className="max-w-4xl w-full bg-white shadow-xl rounded-2xl p-8 space-y-6">
-        {/* Title */}
+       
         <h1 className="text-3xl font-bold text-center text-indigo-600">
           The Wordsworth Club
         </h1>
 
-        {/* Intro */}
+        
         <p className="text-gray-700 leading-relaxed text-justify">
           The Wordsworth Club at <span className="font-semibold">Rajasthan Technical University (RTU)</span> is a club focused on student
            personality and communication skill development. It aims to improve members verbal, non-verbal, and written communication through
@@ -15,7 +15,7 @@ export default function page() {
             literary activities and supports their overall growth and creativity.
         </p>
 
-        {/* Objectives */}
+      
         <div>
           <h2 className="text-2xl font-semibold text-indigo-500 mb-3">Objectives</h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
@@ -26,7 +26,7 @@ export default function page() {
           </ul>
         </div>
 
-        {/* Activities */}
+        
         <div>
           <h2 className="text-2xl font-semibold text-indigo-500 mb-3">Activities</h2>
           <ul className="list-disc list-inside space-y-3 text-gray-700">
@@ -50,7 +50,7 @@ export default function page() {
           </ul>
         </div>
 
-        {/* How to Join */}
+      
         <div>
           <h2 className="text-2xl font-semibold text-indigo-500 mb-3">How to Join or Get Involved</h2>
           <ul className="list-disc list-inside space-y-2 text-gray-700">
@@ -60,7 +60,7 @@ export default function page() {
           </ul>
         </div>
 
-        {/* CTA */}
+        
         <div className="text-center pt-4">
           <a
             href="https://www.instagram.com/wordsworthclub/?hl=en"

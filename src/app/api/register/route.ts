@@ -1,12 +1,26 @@
 import { db } from "../../../lib/db";
 import bcrypt from "bcryptjs";
+import { RowDataPacket } from "mysql2";
+import { OkPacket } from "mysql2";
 
 export async function POST(req: Request) {
+    type User = RowDataPacket & {
+  id: number;
+  email: string;
+  password: string;
+  full_name:string;
+  role:string;
+};
+
   try {
     const { fullName, email, password, role, passkey } = await req.json();
 
 
-    const [rows] = await db.query("SELECT id FROM users WHERE email = ?", [email]);
+    // const [rows] = await db.query("SELECT id FROM users WHERE email = ?", [email]);
+     const [rows] = await db.execute<User[]>(
+  "SELECT * FROM users WHERE email = ?",
+  [email]
+);
     if (rows.length > 0) {
       return new Response(JSON.stringify({ error: "Email already registered" }), { status: 400 });
     }
@@ -18,17 +32,14 @@ export async function POST(req: Request) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
 
-    const [result] = await db.query(
+    const [result] = await db.query<OkPacket>(
       "INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, ?)",
       [fullName, email, hashedPassword, role]
     );
 
-    // return new Response(
-    //   JSON.stringify({ message: "User registered successfully!", userId: result.insertId }),
-    //   { status: 201 }
-    // );
+
     return new Response(
-  JSON.stringify({ message: "User registered successfully!", userId: result.insertId || result[0]?.insertId }),
+  JSON.stringify({ message: "User registered successfully!", userId: result.insertId }),
   { status: 201 }
 );
 
