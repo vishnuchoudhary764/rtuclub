@@ -14,25 +14,27 @@ const Navbar = () => {
     }
   }, [])
   return (
-    <div className='flex justify-evenly flex-col lg:flex-row p-5 gap-6 lg:gap-0 mb-5 bg-blue-200 md:bg-white '>
+    <div className='flex justify-evenly flex-col lg:flex-row p-5 gap-6 md:gap-0 mb-5 text-white md:text-black bg-blue-400 md:bg-white '>
       <Link href="https://www.instagram.com/sac.rtu/?hl=en">
-      <div className='flex flex-col items-center lg:flex-row  gap-4'>
-          <img  className='rounded-full lg:w-20 lg:h-20 h-25 w-25 ' src="sac.jpeg" alt="" />
+      <div className='flex md:flex-col justify-between items-center lg:flex-row  gap-4'>
+          <img  className='rounded-full md:w-20 md:h-20 h-15 w-15 ' src="sac.jpeg" alt="" />
         
-        <p className='font-extrabold text-2xl tracking-widest'>SAC RTU</p>
+        <p className='font-extrabold font-mono text-2xl tracking-widest'>SAC RTU</p>
+        
              
       </div>
        </Link>
       
-      <ul className='flex justify-center text-xl items-center gap-4 lg:gap-10 '>
-        <Link className={pathname === "/" ? "font-bold  text-blue-500":""} href={"/"}>Home</Link>
-        <Link className={pathname === "/clubs" ? "font-bold  text-blue-500":""} href={"/clubs"}>Clubs</Link>
-        <Link  className={pathname === "/events" ? "font-bold  text-blue-500":""} href={"/events"}>Events</Link>
-        {/* <Link className={pathname === "/gallery" ? "font-bold  text-blue-500":""} href={"/gallery"}>Gallery</Link> */}
+      <ul className='flex justify-evenly text-xl items-center gap-4 md:gap-10 '>
+        <Link className={pathname === "/" ? "font-bold  md:text-blue-500":""} href={"/"}>Home</Link>
+        <Link className={pathname === "/clubs" ? "font-bold  md:text-blue-500":""} href={"/clubs"}>Clubs</Link>
+        <p className='hidden md:block'>  <Link  className={pathname === "/events" ? " font-bold  md:text-blue-500":""} href={"/events"}>Events</Link></p>
+      
+        
           {user?.role === "Coordinator" && (
           <Link
             href="/dashboard/coordinator"
-            className="text-gray-700  hover:text-blue-600"
+            className="md:text-gray-700  hover:text-blue-600"
           >
             Dashboard
           </Link>
@@ -40,15 +42,15 @@ const Navbar = () => {
          {user?.role === "User" && (
           <Link
             href="/dashboard/user"
-            className="text-gray-700  hover:text-blue-600"
+            className="md:text-gray-700  hover:text-blue-600"
           >
             Dashboard
           </Link>
         )}
-        <Link  className={pathname === "/profile" ? "border-2 rounded-4xl p-1.5 border-blue-500":""} href={ "/profile"}>
+       <Link  className={pathname === "/profile" ? " border-2 rounded-4xl p-1.5  border-white md:border-blue-500":""} href={ "/profile"}>
         
     
-        <img  width={22} height={22} src="profile.png" alt="" />
+        <img   width={35} height={35} src="user.png" alt="" />
        
         </Link>
         
