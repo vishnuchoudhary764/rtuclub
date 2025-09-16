@@ -19,7 +19,7 @@ export default function ProfilePage() {
   }, [router])
 
   if (!user) {
-    return <p className="p-6">Redirecting to login...</p>
+    return <p className="p-6 w-full h-full">Redirecting to login...</p>
   }
 
   return (
