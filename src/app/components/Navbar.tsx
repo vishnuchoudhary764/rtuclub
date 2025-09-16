@@ -18,7 +18,7 @@ const Navbar = () => {
     <div className='flex justify-evenly flex-col lg:flex-row p-5 gap-6 md:gap-0 mb-5 text-white md:text-black bg-blue-400 md:bg-white '>
      
       <div className='flex md:flex-col justify-between items-center lg:flex-row  gap-4'>
-          <img  className='rounded-full md:w-20 md:h-20 h-15 w-15 ' src="sac.jpeg" alt="" />
+          <img  className='rounded-full md:w-20 md:h-20 h-10 w-10 ' src="sac.jpeg" alt="" />
         
         <p className='font-extrabold font-mono text-2xl tracking-widest'>SAC RTU</p>
           <button
