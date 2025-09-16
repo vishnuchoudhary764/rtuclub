@@ -65,7 +65,7 @@ const Navbar = () => {
       
          
           {isOpen && (
-        <ul className="md:hidden flex flex-row justify-between text-xl items-center mt-4 ">
+        <ul className="md:hidden flex flex-row justify-evenly text-xl items-center mt-4 ">
           <li>
            <Link className={pathname === "/" ? "font-bold  md:text-blue-500":""} href={"/"}>Home</Link>
           </li>
