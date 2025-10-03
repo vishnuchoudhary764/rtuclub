@@ -7,10 +7,11 @@ import { Calendar, MapPin, ArrowRight } from "lucide-react"
 
 type Event = {
    _id: string;
-  title: string
-  description: string
-  event_date: string
-  location: string
+  description: string;
+  clubName: string;
+  date: Date;
+  location: string;
+  
 }
 
 export default function UserDashboardPage() {
@@ -77,12 +78,12 @@ export default function UserDashboardPage() {
                 className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition grid grid-cols-1 md:grid-cols-3 gap-3 items-center"
               >
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900">{ev.title}</h3>
-                  <p className="text-sm text-gray-600">{ev.description}</p>
+                  <h3 className="text-lg font-semibold text-gray-900">{ev.description}</h3>
+                  <p className="text-sm text-gray-600">{ev.clubName}</p>
                 </div>
                 <p className="flex items-center gap-1 text-sm text-gray-500">
                   <Calendar className="w-4 h-4" />
-                  {new Date(ev.event_date).toDateString()}
+                  {new Date(ev.date).toDateString()}
                 </p>
                 <p className="flex items-center gap-1 text-sm text-gray-600">
                   <MapPin className="w-4 h-4" />

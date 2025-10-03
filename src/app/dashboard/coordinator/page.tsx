@@ -212,17 +212,17 @@ export default function CoordinatorDashboardPage() {
               onChange={(e) => setForm({ ...form, CreatedBy: e.target.value })}
               required
             />
-            <div className="flex justify-between px-10">
+            <div className="flex md:justify-between gap-10 px-10">
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+                className="bg-white shadow-lg text-black px-2 md:py-2 rounded-lg hover:bg-gray-600"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="p-2 bg-gray-500 text-white rounded-md hover:bg-blue-700"
+                className="px-3 py-2 w-24 shadow-lg text-white rounded-lg bg-blue-500 hover:bg-blue-600 flex items-center gap-1 text-sm"
 
               >
                 Add Event
@@ -271,7 +271,7 @@ export default function CoordinatorDashboardPage() {
                 <div className="flex gap-4 justify-start">
                   <button
                     // onClick={() => handleEditClick(ev)}
-                    className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-1 text-sm"
+                    className="px-3 py-1 bg-yellow-500  text-white rounded-lg hover:bg-blue-600 flex items-center gap-1 text-sm"
                   >
                     <Edit className="w-4 h-4" /> Edit
                   </button>
