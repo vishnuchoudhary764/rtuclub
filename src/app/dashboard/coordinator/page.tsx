@@ -163,8 +163,8 @@ export default function CoordinatorDashboardPage() {
         </button>
       </div>
       {showForm && (
-        <div className="ml-1 m-8 md:w-170 p-7  bg-blue-100 rounded-xl shadow-sm border border-gray-200 
-        hover:shadow-lg transition fixed top-49 md:top-20 md:left-70">
+        <div className=" md:w-170 p-7  bg-blue-100 rounded-xl shadow-sm border border-gray-200 
+        hover:shadow-lg transition md:fixed top-49 md:top-20 md:left-70">
           <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Add New Event</h2>
           <form onSubmit={(e) => {
             e.preventDefault();
