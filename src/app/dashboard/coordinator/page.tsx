@@ -145,12 +145,12 @@ export default function CoordinatorDashboardPage() {
 
   return (
 
-    <div className="min-h-screen bg-gray-50 py-10 px-6 md:px-20">
+    <div className="min-h-screen bg-white py-10 px-6 md:px-20">
 
       <div className="flex items-center justify-between max-w-5xl mx-auto mb-8">
         <div>
-          <h1 className="text-3xl font-bold text-gray-800">👨‍💼 Coordinator Dashboard</h1>
-          <p className="text-gray-600">Welcome back, {user.name}!</p>
+          <h1 className="text-3xl font-bold">👨‍💼 Coordinator Dashboard</h1>
+          <p className="text-blue-500">Welcome back, {user.name}!</p>
         </div>
 
         <button
@@ -248,13 +248,13 @@ export default function CoordinatorDashboardPage() {
                  grid grid-cols-1  md:grid-cols-5  gap-1 items-center"
               >
 
-                <h3 className="text-lg font-semibold text-gray-900">{ev.description}</h3>
-                <p className="text-sm text-gray-600">{ev.clubName}</p>
-                <p className="flex items-center gap- text-sm text-gray-500">
+                <h3 className="text-lg font-semibold ">{ev.description}</h3>
+                <p className="text-sm ">{ev.clubName}</p>
+                <p className="flex items-center gap- text-sm">
                   <Calendar className="w-4 h-4" />
                   {new Date(ev.date).toDateString()}
                 </p>
-                <p className="flex items-center gap-1 text-sm text-gray-600">
+                <p className="flex items-center gap-1 text-sm ">
                   <MapPin className="w-4 h-4" />
                   {ev.location}
                 </p>
@@ -277,7 +277,7 @@ export default function CoordinatorDashboardPage() {
               </div>
             ))}          </div>
         ) : (
-          <p className="text-gray-500">You created 0 events .</p>
+          <p className="text-red-400">You created 0 events .</p>
         )}
       </div>
     </div>

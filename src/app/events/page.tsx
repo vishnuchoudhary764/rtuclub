@@ -42,22 +42,22 @@ export default function EventsPage() {
       
       </div>
 
-      <div className="grid md:grid-cols-1 grid-cols-2 gap-5 ">
+      <div className="grid  gap-5 ">
         {events.length > 0 ? (
           events.map((ev) => (
             <div key={ev._id} className="p-6  bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg
              transition grid grid-cols-1 md:grid-cols-6 gap-1 items-center  ">
-              <h2 className="text-xl  font-semibold">{ev.description}</h2>
-              <p className="text-gray-600">{ev.clubName}</p>
-              <p className="flex items-center text-sm text-gray-500 gap-2">
+              <h2 className="text-xl font-semibold">{ev.description}</h2>
+              <p className="">{ev.clubName}</p>
+              <p className="flex items-center text-sm  gap-2">
                  <Calendar className="w-4 h-4" />
                  {new Date(ev.date).toDateString()}
               </p>
-              <p className="flex items-center text-sm text-gray-500 gap-2"> 
+              <p className="flex items-center text-sm gap-2"> 
                   <MapPin className="w-4 h-4" />
                  {ev.location}
                  </p>
-                  <p className="flex items-center text-sm text-gray-500 gap-2"> 
+                  <p className="flex items-center text-sm  gap-2"> 
                     Creater : {ev.CreatedBy}
                  </p>
                   <p className="flex justify-center">

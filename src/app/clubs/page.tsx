@@ -64,14 +64,14 @@ const clubs = [
 export default function page() {
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 ">
+    <div className="min-h-screen bg-white p-6 ">
       <h1 className="text-3xl font-bold text-center mb-10">Our Clubs</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {clubs.map((club) => (
           <div
             key={club.id}
-            className="bg-white rounded-2xl  shadow-lg hover:shadow-xl transition overflow-hidden"
+            className="bg-white rounded-2xl border-2 border-black/50  shadow-lg hover:shadow-xl transition overflow-hidden"
           >
             <img height={20} width={20}
               src={club.image}
@@ -81,7 +81,7 @@ export default function page() {
 
             <div className="p-6 text-center">
               <h2 className="text-xl font-semibold">{club.name}</h2>
-              <p className="text-gray-600 mt-2">{club.description}</p>
+              <p className=" mt-2">{club.description}</p>
 
               <Link
                 href={`/${club.rname}`}
