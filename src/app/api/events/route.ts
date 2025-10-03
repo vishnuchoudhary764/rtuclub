@@ -3,7 +3,7 @@
 import { NextResponse } from "next/server";
 import Event from "@/models/Events";
 import { connectDB } from "@/lib/db";
-import { User } from "lucide-react";
+
 
 export async function GET(req:Request) {
   try {
