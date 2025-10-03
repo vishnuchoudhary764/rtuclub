@@ -21,7 +21,7 @@ export default function CoordinatorDashboardPage() {
   const router = useRouter()
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({ description: "", clubName: "", date: "", location: "", CreatedBy: "" })
+  const [form, setForm] = useState({description: "", clubName: "", date: "", location: "",CreatedBy:"" })
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user")
@@ -40,8 +40,11 @@ export default function CoordinatorDashboardPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
+        if (!user?.name) return;
 
-        const res = await fetch("/api/events");
+        const res = await fetch(`/api/events?createdBy=${encodeURIComponent(user.name)}`);
+        
+
         const data: Event[] = await res.json();
         setEvents(data);
       } catch (err) {
@@ -64,7 +67,8 @@ export default function CoordinatorDashboardPage() {
       clubName: ev.clubName,
       date: ev.date.toString().slice(0, 10),
       location: ev.location,
-      CreatedBy: ev.CreatedBy,
+      CreatedBy:ev.CreatedBy,
+    
     });
   };
 
@@ -87,7 +91,7 @@ export default function CoordinatorDashboardPage() {
       res = await fetch("/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, role: user.role }),
+        body: JSON.stringify({ ...form, role: user.role,CreatedBy: user.name }),
       });
     }
 
@@ -107,7 +111,7 @@ export default function CoordinatorDashboardPage() {
                 description: form.description,
                 clubName: form.clubName,
                 location: form.location,
-                CreatedBy: form.CreatedBy,
+                CreatedBy: user.name,
                 date: new Date(),
                 
               }
@@ -118,7 +122,7 @@ export default function CoordinatorDashboardPage() {
       } else {
         setEvents([...events, data]);
       }
-      setForm({ description: "", clubName: "", date: "", location: "", CreatedBy: "" });
+      setForm({ description: "", clubName: "", date: "", location: "" ,CreatedBy:user.name});
       setShowForm(false);
     }
   };
@@ -193,7 +197,7 @@ export default function CoordinatorDashboardPage() {
               type="date"
               className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl "
               value={form.date}
-              onChange={(e) => setForm({ ...form, date: e.target.value })}
+              onChange={(e) => setForm({ ...form, date: e.target.value  })}
               required
             />
             <input
@@ -204,14 +208,7 @@ export default function CoordinatorDashboardPage() {
               onChange={(e) => setForm({ ...form, location: e.target.value })}
               required
             />
-            <input
-              type="text"
-              placeholder="CreatedBy"
-              className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl "
-              value={form.CreatedBy}
-              onChange={(e) => setForm({ ...form, CreatedBy: e.target.value })}
-              required
-            />
+           
             <div className="flex md:justify-between gap-10 px-10">
               <button
                 type="button"
@@ -236,7 +233,7 @@ export default function CoordinatorDashboardPage() {
 
 
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6 mb-10 border border-gray-200">
-        <h2 className="text-xl font-semibold mb-4">📌 Club-Profile</h2>
+        <h2 className="text-xl font-semibold mb-4">Club-Profile</h2>
         <p><span className="font-semibold">Name:</span> {user.name}</p>
 
         <p><span className="font-semibold">Role:</span> {user.role}</p>
@@ -245,14 +242,14 @@ export default function CoordinatorDashboardPage() {
 
 
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-xl font-semibold mb-4">📅 My Events</h2>
+        <h2 className="text-xl font-semibold mb-4">My Events</h2>
         {events.length > 0 ? (
           <div className="space-y-4">
             {events.map((ev) => (
               <div
                 key={ev._id}
                 className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition
-                 grid grid-cols-1 md:grid-cols-6 gap-1 items-center"
+                 grid grid-cols-1  md:grid-cols-5  gap-1 items-center"
               >
 
                 <h3 className="text-lg font-semibold text-gray-900">{ev.description}</h3>
@@ -265,9 +262,7 @@ export default function CoordinatorDashboardPage() {
                   <MapPin className="w-4 h-4" />
                   {ev.location}
                 </p>
-                <p className="flex items-center gap-1 text-sm text-gray-600">
-                  CreatedBy : {ev.CreatedBy}
-                </p>
+               
                 <div className="flex gap-4 justify-start">
                   <button
                     // onClick={() => handleEditClick(ev)}
@@ -286,7 +281,7 @@ export default function CoordinatorDashboardPage() {
               </div>
             ))}          </div>
         ) : (
-          <p className="text-gray-500">No events created yet.</p>
+          <p className="text-gray-500">You created 0 events .</p>
         )}
       </div>
     </div>

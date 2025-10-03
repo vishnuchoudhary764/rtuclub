@@ -47,7 +47,7 @@ export default function EventsPage() {
           events.map((ev) => (
             <div key={ev._id} className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition grid grid-cols-1 md:grid-cols-5 gap-1 items-center">
               <h2 className="text-xl font-semibold">{ev.description}</h2>
-              <p className="text-gray-600">{ev.description}</p>
+              <p className="text-gray-600">{ev.clubName}</p>
               <p className="flex items-center text-sm text-gray-500 gap-2">
                  <Calendar className="w-4 h-4" />
                  {new Date(ev.date).toDateString()}
@@ -57,7 +57,7 @@ export default function EventsPage() {
                  {ev.location}
                  </p>
                   <p className="flex items-center text-sm text-gray-500 gap-2"> 
-                 CreatedBy :  {ev.CreatedBy}
+                    Creater : {ev.CreatedBy}
                  </p>
             </div>
           ))

@@ -3,11 +3,24 @@
 import { NextResponse } from "next/server";
 import Event from "@/models/Events";
 import { connectDB } from "@/lib/db";
+import { User } from "lucide-react";
 
-export async function GET() {
+export async function GET(req:Request) {
   try {
     await connectDB();
-    const events = await Event.find().sort({ id: 1 }); 
+     const { searchParams } = new URL(req.url);
+    const createdBy = searchParams.get("createdBy");
+
+    // const events = await Event.find({ createdBy }).sort({ date: 1 }); 
+    let events;
+
+    if (createdBy) {
+      
+      events = await Event.find({ createdBy}).sort({ date: 1 });
+    } else {
+      
+      events = await Event.find().sort({ date: 1 });
+    }
     return NextResponse.json(events, { status: 200 });
   } catch (err) {
     console.error(err);
@@ -20,7 +33,7 @@ export async function POST(req: Request) {
     await connectDB();
     const { description, clubName, location ,date,CreatedBy} = await req.json();
 
-    if (!description || !clubName || !location || !date || !CreatedBy) {
+    if (!description || !clubName || !location || !date ) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 

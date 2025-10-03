@@ -1,8 +1,10 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import Router, { useRouter } from "next/router";
 
 const RegisterPage = () => {
+  const router = useRouter();
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -28,6 +30,12 @@ const RegisterPage = () => {
     });
 
     const data = await res.json();
+    
+        if(data.user.role === "Coordinator") {
+          router.push("/dashboard/coordinator");
+        } else {
+          router.push("/dashboard/user");
+        }
     setMessage(data.message || data.error);
   };
 
