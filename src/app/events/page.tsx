@@ -1,5 +1,5 @@
 "use client"
-import { Calendar, MapPin} from "lucide-react"
+import { Calendar, MapPin,Edit} from "lucide-react"
 
 import { useEffect, useState } from "react"
 
@@ -42,11 +42,12 @@ export default function EventsPage() {
       
       </div>
 
-      <div className="space-y-4 mb-6  ">
+      <div className="grid md:grid-cols-1 grid-cols-2 gap-5 ">
         {events.length > 0 ? (
           events.map((ev) => (
-            <div key={ev._id} className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition grid grid-cols-1 md:grid-cols-5 gap-1 items-center">
-              <h2 className="text-xl font-semibold">{ev.description}</h2>
+            <div key={ev._id} className="p-6  bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg
+             transition grid grid-cols-1 md:grid-cols-6 gap-1 items-center  ">
+              <h2 className="text-xl  font-semibold">{ev.description}</h2>
               <p className="text-gray-600">{ev.clubName}</p>
               <p className="flex items-center text-sm text-gray-500 gap-2">
                  <Calendar className="w-4 h-4" />
@@ -59,6 +60,14 @@ export default function EventsPage() {
                   <p className="flex items-center text-sm text-gray-500 gap-2"> 
                     Creater : {ev.CreatedBy}
                  </p>
+                  <p className="flex justify-center">
+                  <button
+                    
+                    className="px-3 py-1 bg-yellow-500  text-white rounded-lg hover:bg-blue-400 flex items-center gap-1 text-sm"
+                  >
+                    <Edit className="w-4 h-4" /> Participate
+                  </button>
+                </p>
             </div>
           ))
         ) : (

@@ -6,12 +6,13 @@ import { connectDB } from "@/lib/db";
 
 
 export async function GET(req:Request) {
-  try {
+    
+
+   try {
     await connectDB();
      const { searchParams } = new URL(req.url);
     const createdBy = searchParams.get("createdBy");
 
-    // const events = await Event.find({ createdBy }).sort({ date: 1 }); 
     let events;
 
     if (createdBy) {

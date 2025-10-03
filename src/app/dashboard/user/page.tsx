@@ -71,16 +71,17 @@ export default function UserDashboardPage() {
       <div className="max-w-5xl mx-auto">
         <h2 className="text-xl font-semibold mb-4">📅 My Registered Events</h2>
         {events.length > 0 ? (
-          <div className="space-y-4">
+          <div className="space-y-4 grid grid-cols-2 gap-5">
             {events.map((ev) => (
               <div
                 key={ev._id}
-                className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition grid grid-cols-1 md:grid-cols-3 gap-3 items-center"
+                className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg 
+                transition grid grid-cols-1 md:grid-cols-2 gap-3 items-center "
               >
-                <div>
+                
                   <h3 className="text-lg font-semibold text-gray-900">{ev.description}</h3>
                   <p className="text-sm text-gray-600">{ev.clubName}</p>
-                </div>
+                
                 <p className="flex items-center gap-1 text-sm text-gray-500">
                   <Calendar className="w-4 h-4" />
                   {new Date(ev.date).toDateString()}

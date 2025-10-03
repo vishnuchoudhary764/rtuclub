@@ -21,17 +21,13 @@ export default function CoordinatorDashboardPage() {
   const router = useRouter()
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({description: "", clubName: "", date: "", location: "",CreatedBy:"" })
+  const [form, setForm] = useState({description: "", clubName: "", date: "", location: "" })
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user")
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser)
-      if (parsedUser.role !== "Coordinator") {
-        router.push("/dashboard/user")
-      } else {
-        setUser(parsedUser)
-      }
+        setUser(parsedUser);
     } else {
       router.push("/login")
     }
@@ -41,8 +37,8 @@ export default function CoordinatorDashboardPage() {
     const fetchEvents = async () => {
       try {
         if (!user?.name) return;
-
-        const res = await fetch(`/api/events?createdBy=${encodeURIComponent(user.name)}`);
+         
+        const res = await fetch('/api/events');
         
 
         const data: Event[] = await res.json();
@@ -67,7 +63,7 @@ export default function CoordinatorDashboardPage() {
       clubName: ev.clubName,
       date: ev.date.toString().slice(0, 10),
       location: ev.location,
-      CreatedBy:ev.CreatedBy,
+      // CreatedBy:ev.CreatedBy,
     
     });
   };
@@ -91,7 +87,7 @@ export default function CoordinatorDashboardPage() {
       res = await fetch("/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, role: user.role,CreatedBy: user.name }),
+        body: JSON.stringify({ ...form, role: user.role }),
       });
     }
 
@@ -122,7 +118,7 @@ export default function CoordinatorDashboardPage() {
       } else {
         setEvents([...events, data]);
       }
-      setForm({ description: "", clubName: "", date: "", location: "" ,CreatedBy:user.name});
+      setForm({ description: "", clubName: "", date: "", location: "" });
       setShowForm(false);
     }
   };
