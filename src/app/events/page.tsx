@@ -4,23 +4,36 @@ import { Calendar, MapPin} from "lucide-react"
 import { useEffect, useState } from "react"
 
 type Event = {
-  id: number
-  title: string
-  description: string
-  event_date: string
-  location: string
+   _id: string; 
+   description: string;
+  clubName: string;
+  date: Date;
+  location: string;
+  CreatedBy:string;
 }
 
 export default function EventsPage() {
    const [events, setEvents] = useState<Event[]>([])
+    const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
-    fetch("/api/events")
-      .then((res) => res.json())
-      .then((data) => setEvents(data))
-  }, [])
+    const fetchEvents = async () => {
+      try {
+        const res = await fetch("/api/events");
+        const data: Event[] = await res.json();
+        setEvents(data);
+      } catch (err) {
+        console.error("Failed to fetch events:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
- 
+    fetchEvents();
+  }, []);
+
+  if (loading) return <p className="text-center mt-10">Loading events...</p>;
   return (
     <div className=" p-8 md:px-25  m-auto">
       <div className="flex items-center justify-center pb-10 gap-4">
@@ -32,16 +45,19 @@ export default function EventsPage() {
       <div className="space-y-4 mb-6  ">
         {events.length > 0 ? (
           events.map((ev) => (
-            <div key={ev.id} className="p-7  grid grid-cols-1 md:grid-cols-4 bg-gray-100 rounded-2xl  shadow-2xl">
-              <h2 className="text-xl font-semibold">{ev.title}</h2>
+            <div key={ev._id} className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition grid grid-cols-1 md:grid-cols-5 gap-1 items-center">
+              <h2 className="text-xl font-semibold">{ev.description}</h2>
               <p className="text-gray-600">{ev.description}</p>
               <p className="flex items-center text-sm text-gray-500 gap-2">
                  <Calendar className="w-4 h-4" />
-                 {new Date(ev.event_date).toDateString()}
+                 {new Date(ev.date).toDateString()}
               </p>
               <p className="flex items-center text-sm text-gray-500 gap-2"> 
                   <MapPin className="w-4 h-4" />
                  {ev.location}
+                 </p>
+                  <p className="flex items-center text-sm text-gray-500 gap-2"> 
+                 CreatedBy :  {ev.CreatedBy}
                  </p>
             </div>
           ))

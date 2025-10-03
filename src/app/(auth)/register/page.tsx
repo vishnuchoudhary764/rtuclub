@@ -7,7 +7,7 @@ const RegisterPage = () => {
     fullName: "",
     email: "",
     password: "",
-    role: "", 
+    role: "User", 
     passkey : ""
   });
   const [message, setMessage] = useState("");

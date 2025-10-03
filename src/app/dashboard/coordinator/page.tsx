@@ -6,26 +6,29 @@ import { useRouter } from "next/navigation"
 import { Calendar, MapPin, PlusCircle, Edit, Trash2 } from "lucide-react"
 
 type Event = {
-  id: number
-  title: string
-  description: string
-  event_date: string
-  location: string
+  _id: string;
+  description: string;
+  clubName: string;
+  date: Date;
+  location: string;
+  CreatedBy: string;
 }
 
 export default function CoordinatorDashboardPage() {
   const [user, setUser] = useState<{ id: number; name: string; email: string; role: string } | null>(null)
   const [events, setEvents] = useState<Event[]>([])
+  const [editingEvent, setEditingEvent] = useState<Event | null>(null);
   const router = useRouter()
   const [showForm, setShowForm] = useState(false);
- const [form, setForm] = useState({ title: "", description: "", event_date: "", location: "" })
+  const [loading, setLoading] = useState(true);
+  const [form, setForm] = useState({ description: "", clubName: "", date: "", location: "", CreatedBy: "" })
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user")
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser)
       if (parsedUser.role !== "Coordinator") {
-        router.push("/dashboard/user") 
+        router.push("/dashboard/user")
       } else {
         setUser(parsedUser)
       }
@@ -35,35 +38,115 @@ export default function CoordinatorDashboardPage() {
   }, [router])
 
   useEffect(() => {
-    fetch("/api/events")
-      .then((res) => res.json())
-      .then((data) => setEvents(data))
-  }, [])
+    const fetchEvents = async () => {
+      try {
 
+        const res = await fetch("/api/events");
+        const data: Event[] = await res.json();
+        setEvents(data);
+      } catch (err) {
+        console.error("Failed to fetch events:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+
+  }, []);
+  if (loading) return <p className="text-center mt-10">Loading Dashboard...</p>;
+
+  const handleEditClick = (ev: Event) => {
+    setEditingEvent(ev);
+    setShowForm(true);
+    setForm({
+      description: ev.description,
+      clubName: ev.clubName,
+      date: ev.date.toString().slice(0, 10),
+      location: ev.location,
+      CreatedBy: ev.CreatedBy,
+    });
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!user) return alert("You must be logged in")
+    e.preventDefault();
 
-    const res = await fetch("/api/events", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...form, role: user.role }),
-    })
+    if (!user) return alert("You must be logged in");
 
-    const data = await res.json()
-    alert(data.message || data.error)
+    let res;
+    if (editingEvent) {
+
+      res = await fetch("/api/events", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: editingEvent._id, ...form}),
+        
+      });
+    } else {
+
+      res = await fetch("/api/events", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, role: user.role }),
+      });
+    }
+
+    const data = await res.json();
+    alert(data.message || data.error);
+   
+   
 
     if (res.ok) {
-      setEvents([...events, { id: events.length + 1, ...form }])
-      setForm({ title: "", description: "", event_date: "", location: "" })
+
+      if (editingEvent) {
+        setEvents(
+          events.map((ev) =>
+            editingEvent && ev._id === editingEvent._id
+              ? {
+                ...ev,
+                description: form.description,
+                clubName: form.clubName,
+                location: form.location,
+                CreatedBy: form.CreatedBy,
+                date: new Date(),
+                
+              }
+              : ev
+          )
+        );
+        setEditingEvent(null);
+      } else {
+        setEvents([...events, data]);
+      }
+      setForm({ description: "", clubName: "", date: "", location: "", CreatedBy: "" });
+      setShowForm(false);
     }
-  }
+  };
+
   if (!user) return <p className="p-6">Loading...</p>
 
+  const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this event?")) return;
+
+    try {
+      const res = await fetch(`/api/events?id=${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (res.ok) {
+        alert(data.message);
+        setEvents(events.filter((ev) => ev._id !== id));
+      } else {
+        alert(data.error);
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Failed to delete event");
+    }
+  };
+
   return (
+
     <div className="min-h-screen bg-gray-50 py-10 px-6 md:px-20">
-      
+
       <div className="flex items-center justify-between max-w-5xl mx-auto mb-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-800">👨‍💼 Coordinator Dashboard</h1>
@@ -71,51 +154,62 @@ export default function CoordinatorDashboardPage() {
         </div>
 
         <button
-           onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 scale-80 bg-green-600 text-white px-4 py-2 rounded-xl shadow hover:bg-green-700 transition"
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 scale-80 bg-green-600 text-white px-4 py-2 rounded-xl shadow
+           hover:bg-green-700 transition"
         >
           <PlusCircle className="w-5 h-5" />
           Add Event
         </button>
       </div>
-         {showForm && (
-        <div className="mt-10 w-170 p-6 rounded-xl shadow-lg duration-700 bg-green-600 transform fixed top-45 left-70">
-          <h2 className="text-2xl font-bold mb-4">Add New Event</h2>
-          <form onSubmit={(e) => { e.preventDefault();
+      {showForm && (
+        <div className="mt-10 w-170 p-7 bg-blue-100 rounded-xl shadow-sm border border-gray-200 
+        hover:shadow-lg transition fixed top-20 left-70">
+          <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Add New Event</h2>
+          <form onSubmit={(e) => {
+            e.preventDefault();
             handleSubmit(e);
             setShowForm(false);
-              }} className="space-y-4">
+          }} className="space-y-4 text-blue-500">
             <input
 
               type="text"
-              placeholder="Title"
-              className="w-full shadow-2xl  bg-white duration-100 outline-none focus:scale-105 p-2 rounded-xl "
-              value={form.title}
-              onChange={(e) => setForm({ ...form, title: e.target.value })}
+              placeholder="Description"
+              className="w-full shadow-lg bg-white duration-100 outline-none  p-2 rounded-xl "
+              value={form.description}
+              onChange={(e) => setForm({ ...form, description: e.target.value })}
               required
             />
             <input
-              placeholder="Organised by"
-              className="w-full shadow-2xl  bg-white duration-100 outline-none focus:scale-105  p-2 rounded-xl"
-              value={form.description}
+              placeholder="clubName"
+              className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl"
+              value={form.clubName}
               onChange={(e) =>
-                setForm({ ...form, description: e.target.value })
+                setForm({ ...form, clubName: e.target.value })
               }
               required
             />
             <input
               type="date"
-              className="w-full shadow-2xl  bg-white duration-100 outline-none focus:scale-105  p-2 rounded-xl "
-              value={form.event_date}
-              onChange={(e) => setForm({ ...form, event_date: e.target.value })}
+              className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl "
+              value={form.date}
+              onChange={(e) => setForm({ ...form, date: e.target.value })}
               required
             />
             <input
               type="text"
               placeholder="Location"
-              className="w-full shadow-2xl  bg-white duration-100 outline-none focus:scale-105  p-2 rounded-xl "
+              className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl "
               value={form.location}
               onChange={(e) => setForm({ ...form, location: e.target.value })}
+              required
+            />
+            <input
+              type="text"
+              placeholder="CreatedBy"
+              className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl "
+              value={form.CreatedBy}
+              onChange={(e) => setForm({ ...form, CreatedBy: e.target.value })}
               required
             />
             <div className="flex justify-between px-10">
@@ -140,42 +234,52 @@ export default function CoordinatorDashboardPage() {
         </div>
       )}
 
-     
+
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6 mb-10 border border-gray-200">
         <h2 className="text-xl font-semibold mb-4">📌 Club-Profile</h2>
         <p><span className="font-semibold">Name:</span> {user.name}</p>
-        {/* <p><span className="font-semibold">Roll No.</span> {user.roll}</p>
-        <p><span className="font-semibold">Club:</span> {user.club}</p> */}
+
         <p><span className="font-semibold">Role:</span> {user.role}</p>
       </div>
-     
 
-      
+
+
       <div className="max-w-5xl mx-auto">
         <h2 className="text-xl font-semibold mb-4">📅 My Events</h2>
         {events.length > 0 ? (
           <div className="space-y-4">
             {events.map((ev) => (
               <div
-                key={ev.id}
-                className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition grid grid-cols-1 md:grid-cols-5 gap-3 items-center"
+                key={ev._id}
+                className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition
+                 grid grid-cols-1 md:grid-cols-6 gap-1 items-center"
               >
-               
-                 <h3 className="text-lg font-semibold text-gray-900">{ev.title}</h3>
-                  <p className="text-sm text-gray-600">{ev.description}</p>
-                <p className="flex items-center gap-1 text-sm text-gray-500">
+
+                <h3 className="text-lg font-semibold text-gray-900">{ev.description}</h3>
+                <p className="text-sm text-gray-600">{ev.clubName}</p>
+                <p className="flex items-center gap- text-sm text-gray-500">
                   <Calendar className="w-4 h-4" />
-                  {new Date(ev.event_date).toDateString()}
+                  {new Date(ev.date).toDateString()}
                 </p>
                 <p className="flex items-center gap-1 text-sm text-gray-600">
                   <MapPin className="w-4 h-4" />
                   {ev.location}
                 </p>
+                <p className="flex items-center gap-1 text-sm text-gray-600">
+                  CreatedBy : {ev.CreatedBy}
+                </p>
                 <div className="flex gap-4 justify-start">
-                  <button   className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-1 text-sm">
+                  <button
+                    // onClick={() => handleEditClick(ev)}
+                    className="px-3 py-1 bg-blue-500 text-white rounded-lg hover:bg-blue-600 flex items-center gap-1 text-sm"
+                  >
                     <Edit className="w-4 h-4" /> Edit
                   </button>
-                  <button   className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-1 text-sm">
+
+                  <button
+                    onClick={() => handleDelete(ev._id)}
+                    className="px-3 py-1 bg-red-500 text-white rounded-lg hover:bg-red-600 flex items-center gap-1 text-sm"
+                  >
                     <Trash2 className="w-4 h-4" /> Delete
                   </button>
                 </div>

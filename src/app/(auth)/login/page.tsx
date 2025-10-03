@@ -29,12 +29,10 @@ export default function LoginPage() {
 
         localStorage.setItem("user", JSON.stringify(data.user))
 
-        if (data.user.role === "User") {
-          router.push("/dashboard/user");
-        } else if (data.user.role === "Coordinator") {
+        if(data.user.role === "Coordinator") {
           router.push("/dashboard/coordinator");
         } else {
-          alert("Unknown role: " + data.user.role);
+          router.push("/dashboard/user");
         }
 
 

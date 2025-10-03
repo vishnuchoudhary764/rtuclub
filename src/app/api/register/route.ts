@@ -1,50 +1,44 @@
-import { db } from "../../../lib/db";
+
+import { connectDB } from "@/lib/db";
+import User from "@/models/NewUser";
 import bcrypt from "bcryptjs";
-import { RowDataPacket } from "mysql2";
-import { OkPacket } from "mysql2";
+import Error from "next/error";
 
 export async function POST(req: Request) {
-    type User = RowDataPacket & {
-  id: number;
-  email: string;
-  password: string;
-  full_name:string;
-  role:string;
-};
-
   try {
     const { fullName, email, password, role, passkey } = await req.json();
 
+    await connectDB();
 
-    // const [rows] = await db.query("SELECT id FROM users WHERE email = ?", [email]);
-     const [rows] = await db.execute<User[]>(
-  "SELECT * FROM users WHERE email = ?",
-  [email]
-);
-    if (rows.length > 0) {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
       return new Response(JSON.stringify({ error: "Email already registered" }), { status: 400 });
     }
-    //  const key = process.env.PASS_KEY;
-    if (role === "Coordinator" && passkey !== "vc@sac") {
-     return Response.json({ error: "Invalid coordinator passkey" }, { status: 403 });
+
+    if (role === "Coordinator" && passkey !== process.env.PASSKEY) {
+      return new Response(JSON.stringify({ error: "Invalid coordinator passkey" }), { status: 403 });
     }
 
+    
     const hashedPassword = await bcrypt.hash(password, 10);
 
+   
+    const newUser = new User({
+      fullname: fullName,
+      email,
+      password: hashedPassword,
+      role,
+      passkey,
+    });
 
-    const [result] = await db.query<OkPacket>(
-      "INSERT INTO users (full_name, email, password, role) VALUES (?, ?, ?, ?)",
-      [fullName, email, hashedPassword, role]
-    );
-
+    await newUser.save();
 
     return new Response(
-  JSON.stringify({ message: "User registered successfully!", userId: result.insertId }),
-  { status: 201 }
-);
-
+      JSON.stringify({ message: "User registered successfully!", userId: newUser._id }),
+      { status: 201 }
+    );
   } catch (error) {
-    console.error(error);
-    return new Response(JSON.stringify({ error: "Registration failed" }), { status: 500 });
+    console.error("Registration failed:", error);
+    return new Response(JSON.stringify({ error: "Registration failed"}), { status: 500 });
   }
 }
