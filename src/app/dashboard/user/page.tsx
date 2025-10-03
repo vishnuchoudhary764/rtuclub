@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { Calendar, MapPin, ArrowRight } from "lucide-react"
 
 type Event = {
-  id: number
+   _id: string;
   title: string
   description: string
   event_date: string
@@ -22,8 +22,8 @@ export default function UserDashboardPage() {
     const storedUser = localStorage.getItem("user")
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser)
-      if (parsedUser.role !== "User") {
-        router.push("/profile") 
+      if (parsedUser.role == "User") {
+        router.push("/dashboard/user") 
       } else {
         setUser(parsedUser)
       }
@@ -73,7 +73,7 @@ export default function UserDashboardPage() {
           <div className="space-y-4">
             {events.map((ev) => (
               <div
-                key={ev.id}
+                key={ev._id}
                 className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition grid grid-cols-1 md:grid-cols-3 gap-3 items-center"
               >
                 <div>

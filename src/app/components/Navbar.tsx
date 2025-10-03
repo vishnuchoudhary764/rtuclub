@@ -37,6 +37,7 @@ const Navbar = () => {
         <Link className={pathname === "/" ? "font-bold  md:text-blue-500" : ""} href={"/"}>Home</Link>
         <Link className={pathname === "/clubs" ? "font-bold  md:text-blue-500" : ""} href={"/clubs"}>Clubs</Link>
         <Link className={pathname === "/events" ? " font-bold  md:text-blue-500" : ""} href={"/events"}>Events</Link>
+       
 
 
         {user?.role === "Coordinator" && (
@@ -76,7 +77,7 @@ const Navbar = () => {
           <li>
             <Link className={pathname === "/clubs" ? "font-bold  md:text-blue-500" : ""} href={"/clubs"}>Clubs</Link>
           </li>
-
+          
           <li>
             {user?.role === "Coordinator" && (
 
