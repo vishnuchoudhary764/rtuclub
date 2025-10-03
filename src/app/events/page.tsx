@@ -33,7 +33,7 @@ export default function EventsPage() {
     fetchEvents();
   }, []);
 
-  if (loading) return <p className="text-center mt-10">Loading events...</p>;
+  if (loading) return <h1 className="text-center text-xl mt-40">Loading events...</h1>;
   return (
     <div className=" p-8 md:px-25  m-auto">
       <div className="flex items-center justify-center pb-10 gap-4">

@@ -22,8 +22,8 @@ export default function UserDashboardPage() {
     const storedUser = localStorage.getItem("user")
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser)
-      if (parsedUser.role == "User") {
-        router.push("/dashboard/user") 
+      if (parsedUser.role !== "User") {
+        router.push("/dashboard/coordinator") 
       } else {
         setUser(parsedUser)
       }

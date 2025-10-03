@@ -54,7 +54,7 @@ export default function CoordinatorDashboardPage() {
     fetchEvents();
 
   }, []);
-  if (loading) return <p className="text-center mt-10">Loading Dashboard...</p>;
+  if (loading) return <h1 className="text-center text-xl mt-40">Loading Dashboard...</h1>;
 
   const handleEditClick = (ev: Event) => {
     setEditingEvent(ev);
