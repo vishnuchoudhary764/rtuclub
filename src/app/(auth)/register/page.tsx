@@ -1,10 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import  { useRouter } from "next/router";
-
 const RegisterPage = () => {
-  const router = useRouter();
+ 
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -21,7 +19,6 @@ const RegisterPage = () => {
 
   const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-     router.push("/login");
     setMessage("");
 
     const res = await fetch("/api/register", {
@@ -31,10 +28,9 @@ const RegisterPage = () => {
     });
 
     const data = await res.json();
-    
-     
     setMessage(data.message || data.error);
   };
+
 
   return (
     <div className="flex items-center justify-center ">
