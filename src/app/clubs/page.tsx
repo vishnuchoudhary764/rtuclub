@@ -65,7 +65,7 @@ export default function page() {
 
   return (
     <div className="min-h-screen bg-white p-6 ">
-      <h1 className="text-3xl font-bold text-center mb-10">Our Clubs</h1>
+      <h1 className="text-3xl text-indigo-500 font-bold text-center mb-10">Our Clubs</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {clubs.map((club) => (
@@ -80,8 +80,8 @@ export default function page() {
             />
 
             <div className="p-6 text-center">
-              <h2 className="text-xl font-semibold">{club.name}</h2>
-              <p className=" mt-2">{club.description}</p>
+              <h2 className="text-xl text-black font-semibold">{club.name}</h2>
+              <p className=" mt-2 text-gray-700">{club.description}</p>
 
               <Link
                 href={`/${club.rname}`}

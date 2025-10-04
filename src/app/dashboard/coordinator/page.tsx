@@ -53,7 +53,7 @@ export default function CoordinatorDashboardPage() {
     fetchEvents();
 
   }, []);
-  if (loading) return <h1 className="text-center text-xl mt-40">Loading Dashboard...</h1>;
+  if (loading) return <h1 className="text-center text-black text-xl mt-40">Loading Dashboard...</h1>;
 
   const handleEditClick = (ev: Event) => {
     setEditingEvent(ev);
@@ -145,11 +145,11 @@ export default function CoordinatorDashboardPage() {
 
   return (
 
-    <div className="min-h-screen bg-white py-10 px-6 md:px-20">
+    <div className="min-h-screen bg-white text-black py-10 px-6 md:px-20">
 
       <div className="flex items-center justify-between max-w-5xl mx-auto mb-8">
         <div>
-          <h1 className="text-3xl font-bold">👨‍💼 Coordinator Dashboard</h1>
+          <h1 className="text-3xl text-black font-bold">👨‍💼 Coordinator Dashboard</h1>
           <p className="text-blue-500">Welcome back, {user.name}!</p>
         </div>
 
@@ -229,16 +229,16 @@ export default function CoordinatorDashboardPage() {
 
 
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6 mb-10 border border-gray-200">
-        <h2 className="text-xl font-semibold mb-4">Club-Profile</h2>
-        <p><span className="font-semibold">Name:</span> {user.name}</p>
+        <h2 className="text-xl text-indigo-400 font-semibold mb-4">Club-Profile</h2>
+        <p><span className="font-semibold text-gray-700">Name :</span> {user.name}</p>
 
-        <p><span className="font-semibold">Role:</span> {user.role}</p>
+        <p><span className="font-semibold text-gray-700">Role :</span> {user.role}</p>
       </div>
 
 
 
-      <div className="max-w-5xl mx-auto">
-        <h2 className="text-xl font-semibold mb-4">My Events</h2>
+      <div className="max-w-5xl mx-auto text-black">
+        <h2 className="text-xl font-semibold mb-4 text-black">My Events</h2>
         {events.length > 0 ? (
           <div className="space-y-4">
             {events.map((ev) => (
