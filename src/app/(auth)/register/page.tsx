@@ -33,7 +33,7 @@ const RegisterPage = () => {
 
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center justify-center text-black ">
       <div className=" bg-white p-10 rounded-2xl shadow-2xl w-110">
         <h2 className="text-2xl font-bold mb-6 text-center">Register</h2>
 
@@ -113,7 +113,7 @@ const RegisterPage = () => {
 
         {message && <p className="mt-4 text-center text-sm">{message}</p>}
 
-        <p className="mt-4 text-center text-sm">
+        <p className="mt-4 text-center ">
           Already have an account?{" "}
           <Link href="/login" className="text-blue-500 hover:underline">
             Login

@@ -49,7 +49,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center ">
+    <div className="flex items-center text-black justify-center ">
       <div className="bg-white p-8  rounded-2xl shadow-2xl w-110">
         <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
 
@@ -86,7 +86,7 @@ export default function LoginPage() {
             {loading ? "Logging in..." : "Login"}
           </button>
 
-          <p className="mt-4 text-center text-sm">
+          <p className="mt-4 text-center">
             Don&apos;t have an account?{" "}
             <Link href="/register" className="text-blue-500 hover:underline">
               Register

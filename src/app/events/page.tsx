@@ -37,7 +37,7 @@ export default function EventsPage() {
   return (
     <div className=" p-8 md:px-25  m-auto">
       <div className="flex items-center justify-center pb-10 gap-4">
-        <h1 className="text-2xl font-bold  text-center">🎉 Upcoming Events</h1>
+        <h1 className="text-2xl font-bold text-black  text-center">🎉 Upcoming Events</h1>
 
       
       </div>
