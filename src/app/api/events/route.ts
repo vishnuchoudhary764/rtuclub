@@ -11,13 +11,13 @@ export async function GET(req:Request) {
    try {
     await connectDB();
      const { searchParams } = new URL(req.url);
-    const createdBy = searchParams.get("createdBy");
+    const CreatedBy = searchParams.get("CreatedBy");
 
     let events;
 
-    if (createdBy) {
+    if (CreatedBy) {
       
-      events = await Event.find({ createdBy}).sort({ date: 1 });
+      events = await Event.find({ CreatedBy}).sort({ date: 1 });
     } else {
       
       events = await Event.find().sort({ date: 1 });
@@ -30,15 +30,18 @@ export async function GET(req:Request) {
 }
 
 export async function POST(req: Request) {
+  await connectDB();
   try {
-    await connectDB();
+    
     const { description, clubName, location ,date,CreatedBy} = await req.json();
+    console.log(CreatedBy)
+   
 
     if (!description || !clubName || !location || !date ) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
-
-    const newEvent = await Event.create({ description, clubName, location ,date,CreatedBy });
+    const newEvent = new Event({ description, clubName, date, location, CreatedBy });
+    await newEvent.save();
     return NextResponse.json(newEvent, { status: 201 });
   } catch (err) {
     console.error(err);
@@ -56,11 +59,10 @@ export async function DELETE(req: Request) {
       return NextResponse.json({ error: "Event ID is required" }, { status: 400 });
     }
 
-    const deletedEvent = await Event.findByIdAndDelete(id);
-
-    if (!deletedEvent) {
-      return NextResponse.json({ error: "Event not found" }, { status: 404 });
-    }
+     await Event.findByIdAndDelete(id);
+     
+    return NextResponse.json({ message: "Event deleted successfully" }, { status: 200 });
+    
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: "Failed to delete event" }, { status: 500 });
@@ -74,14 +76,13 @@ export async function PATCH(req: Request) {
 
     if (!id) return NextResponse.json({ error: "Event ID is required" }, { status: 400 });
 
-    const updatedEvent = await Event.findByIdAndUpdate(
+      await Event.findByIdAndUpdate(
       id,
       { description, clubName, date, location, CreatedBy },
       { new: true } 
     );
-
-    if (!updatedEvent)
-      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+     
+      return NextResponse.json({ error: "Event Updated !" }, { status: 404 });
 
 
   } catch (err) {

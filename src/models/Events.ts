@@ -1,6 +1,6 @@
 import mongoose, { Schema, Document } from "mongoose";
 export interface IEvent extends Document {
-
+     
     description: string;
     clubName: string;
     date: Date;
@@ -10,12 +10,12 @@ export interface IEvent extends Document {
 }
 
 const EventSchema = new Schema<IEvent>({
-
+    
     description: { type: String, required: true },
     clubName: { type: String, required: true },
     date: { type: Date, required: true },
     location: { type: String, required: true },
-    CreatedBy: { type: String, required: true },
+    CreatedBy: { type: String, required: false },
     
 
 }, {

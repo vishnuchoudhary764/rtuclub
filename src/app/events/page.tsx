@@ -33,6 +33,12 @@ export default function EventsPage() {
     fetchEvents();
   }, []);
 
+   const handleParticipate = () => {
+    alert("Work under process for this feature..")
+    
+   
+  }
+
   if (loading) return <h1 className="text-center text-xl mt-40">Loading events...</h1>;
   return (
     <div className=" p-8 md:px-25  m-auto">
@@ -62,7 +68,7 @@ export default function EventsPage() {
                  </p>
                   <p className="flex justify-center">
                   <button
-                    
+                     onClick={handleParticipate}
                     className="px-3 py-1 bg-yellow-500  text-white rounded-lg hover:bg-blue-400 flex items-center gap-1 text-sm"
                   >
                     <Edit className="w-4 h-4" /> Participate

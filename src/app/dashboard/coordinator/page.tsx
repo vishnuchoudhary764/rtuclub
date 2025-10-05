@@ -1,9 +1,9 @@
-
 "use client"
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Calendar, MapPin, PlusCircle, Edit, Trash2 } from "lucide-react"
+import { json } from "stream/consumers"
 
 type Event = {
   _id: string;
@@ -21,7 +21,7 @@ export default function CoordinatorDashboardPage() {
   const router = useRouter()
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({description: "", clubName: "", date: "", location: "" })
+  const [form, setForm] = useState({description: "", clubName: "", date: "", location: ""})
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user")
@@ -36,7 +36,7 @@ export default function CoordinatorDashboardPage() {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        if (!user?.name) return;
+      
          
         const res = await fetch('/api/events');
         
@@ -70,6 +70,7 @@ export default function CoordinatorDashboardPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+  
 
     if (!user) return alert("You must be logged in");
 
@@ -81,17 +82,20 @@ export default function CoordinatorDashboardPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: editingEvent._id, ...form}),
         
+        
       });
     } else {
-
+         
       res = await fetch("/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, role: user.role }),
+        body: JSON.stringify({ ...form,CreatedBy:user.name }),
+      
       });
     }
 
     const data = await res.json();
+    
     alert(data.message || data.error);
    
    
@@ -118,7 +122,7 @@ export default function CoordinatorDashboardPage() {
       } else {
         setEvents([...events, data]);
       }
-      setForm({ description: "", clubName: "", date: "", location: "" });
+      setForm({ description: "", clubName: "", date: "", location: ""});
       setShowForm(false);
     }
   };
@@ -261,7 +265,7 @@ export default function CoordinatorDashboardPage() {
                
                 <div className="flex gap-4 justify-start">
                   <button
-                    // onClick={() => handleEditClick(ev)}
+                    onClick={() => handleEditClick(ev)}
                     className="px-3 py-1 bg-yellow-500  text-white rounded-lg hover:bg-blue-600 flex items-center gap-1 text-sm"
                   >
                     <Edit className="w-4 h-4" /> Edit
