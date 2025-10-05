@@ -61,7 +61,7 @@ const clubs = [
   },
 ];
 
-export default function page() {
+export default function Clubpage() {
 
   return (
     <div className="min-h-screen bg-white p-6 ">

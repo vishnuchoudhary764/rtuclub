@@ -1,9 +1,12 @@
 "use client"
 import React from 'react'
 import { useRouter } from 'next/navigation';
+import EventsPage from './events/page';
+import Clubpage from './clubs/page';
 
 
-export default function Page(){
+
+export default function HomePage(){
 
   const router = useRouter();
   return (
@@ -40,6 +43,9 @@ export default function Page(){
         </div>
 
       </div>
+  
+      <Clubpage/>
+      
       <p className="text-center text-gray-400 text-sm m-auto md:p-2  ">
          <a href="https://www.linkedin.com/in/vishnuchoudhary7/">&lt;/&gt; by Vishnu with love</a></p>
      
