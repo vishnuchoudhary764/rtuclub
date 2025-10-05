@@ -44,7 +44,7 @@ export default function UserDashboardPage() {
   if (!user) return <p className="p-6 ">Loading...</p>
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 px-6 md:px-20">
+    <div className="min-h-screen bg-gray-50 text-black py-10 px-6 md:px-20">
      
       <div className="flex items-center justify-between max-w-5xl mx-auto mb-8">
         <div>
@@ -63,8 +63,10 @@ export default function UserDashboardPage() {
      
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6 mb-10 border border-gray-200">
         <h2 className="text-xl font-semibold mb-4"> Profile Summary</h2>
-        <p><span className="font-semibold">Name:</span> {user.name}</p>
-        <p><span className="font-semibold">Role:</span> {user.role}</p>
+        <p><span className="font-semibold">Name :</span> {user.name}</p>
+        <p><span className="font-semibold">Email :</span> {user.email}</p>
+        <p><span className="font-semibold">Role :</span> {user.role}</p>
+
       </div>
 
      
@@ -79,7 +81,7 @@ export default function UserDashboardPage() {
                 transition grid grid-cols-1 md:grid-cols-2 gap-3 items-center "
               >
                 
-                  <h3 className="text-lg font-semibold ">{ev.description}</h3>
+                  <h3 className="text-lg font-semibold text-indigo-500">{ev.description}</h3>
                   <p className="text-sm ">{ev.clubName}</p>
                 
                 <p className="flex items-center gap-1 text-sm ">

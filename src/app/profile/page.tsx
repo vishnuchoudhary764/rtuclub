@@ -18,9 +18,10 @@ export default function ProfilePage() {
     }
   }, [router])
 
-  if (!user) {
-    return <p className="p-6 w-full h-full">Redirecting to login...</p>
-  }
+   if (!user) return  <div className='flex justify-center items-center h-100 '>
+      <p className="text-red-500">Redirecting to login...</p>
+    </div>
+
 
   return (
     <div className="p-7 flex items-center justify-center ">

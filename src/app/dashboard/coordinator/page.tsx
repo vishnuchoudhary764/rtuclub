@@ -28,33 +28,35 @@ export default function CoordinatorDashboardPage() {
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser)
         setUser(parsedUser);
+         setLoading(false);
+
     } else {
       router.push("/login")
     }
   }, [router])
 
   useEffect(() => {
+    
     const fetchEvents = async () => {
-      try {
       
-         
-        const res = await fetch('/api/events');
-        
-
+      try {
+         const res = await fetch('/api/events');
         const data: Event[] = await res.json();
         setEvents(data);
+      
+
       } catch (err) {
         console.error("Failed to fetch events:", err);
       } finally {
-        setLoading(false);
+       
       }
     };
 
     fetchEvents();
 
   }, []);
-  if (loading) return  <div className='flex justify-center h-100 '>
-      <img className='bg-transparent'  width={200} src="loading.svg" alt="loading...." />
+  if (loading) return  <div className='flex justify-center items-center h-100 '>
+      <img className='bg-transparent'  width={200} src="/loading.svg" alt="loading...." />
     </div>
 
   const handleEditClick = (ev: Event) => {
@@ -173,7 +175,7 @@ export default function CoordinatorDashboardPage() {
       </div>
       {showForm && (
         <div className=" md:w-170 p-7  bg-blue-100 rounded-xl shadow-sm border border-gray-200 
-        hover:shadow-lg transition md:fixed top-49 md:top-20 md:left-70">
+        hover:shadow-lg transition fixed top-49 md:top-20 md:left-70">
           <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Add New Event</h2>
           <form onSubmit={(e) => {
             e.preventDefault();
@@ -240,7 +242,7 @@ export default function CoordinatorDashboardPage() {
       <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6 mb-10 border border-gray-200">
         <h2 className="text-xl text-indigo-400 font-semibold mb-4">Club-Profile</h2>
         <p><span className="font-semibold text-gray-700">Name :</span> {user.name}</p>
-
+        <p><span className="font-semibold text-gray-700">Email :</span> {user.email}</p>
         <p><span className="font-semibold text-gray-700">Role :</span> {user.role}</p>
       </div>
 

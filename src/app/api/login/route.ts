@@ -5,10 +5,9 @@ import User from "@/models/NewUser";
 import { connectDB } from "@/lib/db";
 
 export async function POST(req: Request) {
+  await connectDB();
   try {
     const { email, password } = await req.json();
-
-    await connectDB();
 
     const user = await User.findOne({ email });
 
@@ -24,7 +23,7 @@ export async function POST(req: Request) {
 
     return NextResponse.json({
       message: "Login successful",
-      user: { id: user.id, name: user.fullname, role: user.role },
+      user: { id: user.id, name: user.fullname, role: user.role ,email:user.email},
     });
   } catch (error) {
     console.error(error);
