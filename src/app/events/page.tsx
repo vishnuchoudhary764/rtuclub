@@ -39,7 +39,10 @@ export default function EventsPage() {
    
   }
 
-  if (loading) return <h1 className="text-center text-xl mt-40">Loading events...</h1>;
+  if (loading) return  <div className='flex justify-center h-100 '>
+      <img className='bg-transparent'  width={200} src="loading.svg" alt="loading...." />
+    </div>
+
   return (
     <div className=" p-8 md:px-25  m-auto">
       <div className="flex items-center justify-center pb-10 gap-4">
@@ -63,7 +66,7 @@ export default function EventsPage() {
                   <MapPin className="w-4 h-4" />
                  {ev.location}
                  </p>
-                  <p className="flex items-center text-gray-500 text-sm  gap-2"> 
+                  <p className="flex items-center text-gray-200 text-sm  gap-2"> 
                     Creater : {ev.CreatedBy}
                  </p>
                   <p className="flex justify-center">

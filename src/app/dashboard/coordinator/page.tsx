@@ -53,7 +53,9 @@ export default function CoordinatorDashboardPage() {
     fetchEvents();
 
   }, []);
-  if (loading) return <h1 className="text-center text-black text-xl mt-40">Loading Dashboard...</h1>;
+  if (loading) return  <div className='flex justify-center h-100 '>
+      <img className='bg-transparent'  width={200} src="loading.svg" alt="loading...." />
+    </div>
 
   const handleEditClick = (ev: Event) => {
     setEditingEvent(ev);
@@ -127,7 +129,10 @@ export default function CoordinatorDashboardPage() {
     }
   };
 
-  if (!user) return <p className="p-6">Loading...</p>
+  if (!user) return  <div className='flex justify-center h-100 '>
+      <img className='bg-transparent'  width={200} src="loading.svg" alt="loading...." />
+    </div>
+
 
   const handleDelete = async (id: string) => {
     if (!confirm("Are you sure you want to delete this event?")) return;
