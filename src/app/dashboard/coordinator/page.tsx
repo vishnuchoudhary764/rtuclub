@@ -132,7 +132,7 @@ export default function CoordinatorDashboardPage() {
   };
 
   if (!user) return  <div className='flex justify-center h-100 '>
-      <img className='bg-transparent'  width={200} src="loading.svg" alt="loading...." />
+      <img className='bg-transparent'  width={70} src="loading.svg" alt="loading...." />
     </div>
 
 
@@ -166,7 +166,7 @@ export default function CoordinatorDashboardPage() {
 </div>
       {showForm && (
         <div className=" md:w-170 p-7  bg-blue-100 rounded-xl shadow-sm border border-gray-200 
-        hover:shadow-lg transition mr-6 fixed top-49 md:top-20 md:left-70">
+        hover:shadow-lg transition left-0 m-6 fixed top-49 md:top-20 md:left-70">
           <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Add New Event</h2>
           <form onSubmit={(e) => {
             e.preventDefault();

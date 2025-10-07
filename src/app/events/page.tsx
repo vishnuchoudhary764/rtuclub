@@ -40,7 +40,7 @@ export default function EventsPage() {
   }
 
   if (loading) return  <div className='flex justify-center h-100 '>
-      <img className='bg-transparent'  width={200} src="/loading.svg" alt="loading...." />
+      <img className='bg-transparent'  width={70} src="/loading.svg" alt="loading...." />
     </div>
 
   return (
