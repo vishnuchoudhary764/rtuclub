@@ -159,23 +159,14 @@ export default function CoordinatorDashboardPage() {
     <div className="min-h-screen bg-white text-black py-10 px-6 md:px-20">
 
       <div className="flex items-center justify-between max-w-5xl mx-auto mb-8">
-        <div>
-          <h1 className="text-3xl text-black font-bold">👨‍💼 Coordinator Dashboard</h1>
+        <div className="flex items-center m-auto flex-col -mt-7">
+          <p className="md:text-3xl text-2xl text-black font-bold"> Coordinator Dashboard</p>
           <p className="text-blue-500">Welcome back, {user.name}!</p>
         </div>
-
-        <button
-          onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 scale-80 bg-green-600 text-white px-4 py-2 rounded-xl shadow
-           hover:bg-green-700 transition"
-        >
-          <PlusCircle className="w-5 h-5" />
-          Add Event
-        </button>
-      </div>
+</div>
       {showForm && (
         <div className=" md:w-170 p-7  bg-blue-100 rounded-xl shadow-sm border border-gray-200 
-        hover:shadow-lg transition fixed top-49 md:top-20 md:left-70">
+        hover:shadow-lg transition mr-6 fixed top-49 md:top-20 md:left-70">
           <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Add New Event</h2>
           <form onSubmit={(e) => {
             e.preventDefault();
@@ -239,23 +230,29 @@ export default function CoordinatorDashboardPage() {
       )}
 
 
-      <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-md p-6 mb-10 border border-gray-200">
-        <h2 className="text-xl text-indigo-400 font-semibold mb-4">Club-Profile</h2>
-        <p><span className="font-semibold text-gray-700">Name :</span> {user.name}</p>
-        <p><span className="font-semibold text-gray-700">Email :</span> {user.email}</p>
-        <p><span className="font-semibold text-gray-700">Role :</span> {user.role}</p>
-      </div>
 
 
-
-      <div className="max-w-5xl mx-auto text-black">
-        <h2 className="text-xl font-semibold mb-4 text-black">My Events</h2>
+      <div className="max-w-5xl mx-auto  text-black">
+        <div className="flex justify-between items-center m-4  ">
+            <p className="text-xl font-semibold text-center text-indigo-500">My Events</p>
+        {!showForm && (  
+          <button
+          onClick={() => setShowForm(true)}
+          className="flex items-center gap-2 scale-80 bg-green-600 text-white px-4 py-2 rounded-xl shadow
+           hover:bg-green-700 transition"
+        >
+          <PlusCircle className="w-5 h-5" />
+          Add 
+        </button>
+        )}
+        </div>
+      
         {events.length > 0 ? (
           <div className="space-y-4">
             {events.map((ev) => (
               <div
                 key={ev._id}
-                className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg transition
+                className="p-6 bg-white rounded-xl space-y-1 shadow-sm border border-gray-200 hover:shadow-lg transition
                  grid grid-cols-1  md:grid-cols-5  gap-1 items-center"
               >
 
