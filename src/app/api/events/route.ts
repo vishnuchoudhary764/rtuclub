@@ -14,10 +14,11 @@ export async function GET(req:Request) {
     const CreatedBy = searchParams.get("CreatedBy");
 
     let events;
-
+      let query = {};
     if (CreatedBy) {
+       query = { CreatedBy: { $regex: new RegExp(`^${CreatedBy.trim()}$`, "i") } };
       
-      events = await Event.find({ CreatedBy}).sort({ date: 1 });
+      events = await Event.find(query).sort({ date: 1 });
     } else {
       
       events = await Event.find().sort({ date: 1 });

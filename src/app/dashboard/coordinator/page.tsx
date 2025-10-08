@@ -23,40 +23,38 @@ export default function CoordinatorDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({description: "", clubName: "", date: "", location: ""})
 
+  
   useEffect(() => {
-    const storedUser = localStorage.getItem("user")
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser)
-        setUser(parsedUser);
-         setLoading(false);
-
-    } else {
-      router.push("/login")
-    }
-  }, [router])
-
-  useEffect(() => {
-    
-    const fetchEvents = async () => {
-      
+   
+    const stored = localStorage.getItem("user");
+    if (stored) {
       try {
-         const res = await fetch('/api/events');
-        const data: Event[] = await res.json();
-        setEvents(data);
-      
+        const parsedUser = JSON.parse(stored);
+        setUser(parsedUser);
+         setLoading(false)
+        console.log("User name:", parsedUser.name);
 
+        if (parsedUser.name) {
+         
+          fetch(`/api/events?CreatedBy=${encodeURIComponent(parsedUser.name.trim())}`)
+            .then((res) => res.json())
+            .then((data) => {
+              console.log("Fetched events:", data);
+              setEvents(data);
+             
+            })
+            .catch(console.error);
+        }
       } catch (err) {
-        console.error("Failed to fetch events:", err);
-      } finally {
-       
+        console.error("Failed to parse user:", err);
       }
-    };
-
-    fetchEvents();
-
+    } else {
+      console.warn("No user found in localStorage");
+    }
   }, []);
+
   if (loading) return  <div className='flex justify-center items-center h-100 '>
-      <img className='bg-transparent'  width={200} src="/loading.svg" alt="loading...." />
+      <img className='bg-transparent'  width={70} src="/loading.svg" alt="loading...." />
     </div>
 
   const handleEditClick = (ev: Event) => {
@@ -165,8 +163,8 @@ export default function CoordinatorDashboardPage() {
         </div>
 </div>
       {showForm && (
-        <div className=" md:w-170 p-7  bg-blue-100 rounded-xl shadow-sm border border-gray-200 
-        hover:shadow-lg transition left-0 m-6 fixed top-49 md:top-20 md:left-70">
+        <div className=" md:w-170 p-7 w-95 m-auto bg-blue-100 rounded-xl shadow-sm border border-gray-200 
+        hover:shadow-lg transition fixed  top-60 md:top-20 md:left-70">
           <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Add New Event</h2>
           <form onSubmit={(e) => {
             e.preventDefault();
