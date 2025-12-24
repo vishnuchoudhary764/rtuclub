@@ -22,6 +22,7 @@ export default function CoordinatorDashboardPage() {
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({description: "", clubName: "", date: "", location: ""})
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   
   useEffect(() => {
@@ -31,8 +32,13 @@ export default function CoordinatorDashboardPage() {
       try {
         const parsedUser = JSON.parse(stored);
         setUser(parsedUser);
+          if(parsedUser.role === "coordinator") {
+          setIsAuthenticated(true)
+        } else {
+          router.push("/dashboard/user");
+        }
          setLoading(false)
-        console.log("User name:", parsedUser.name);
+      
 
         if (parsedUser.name) {
          
@@ -151,7 +157,7 @@ export default function CoordinatorDashboardPage() {
       alert("Failed to delete event");
     }
   };
-
+if (isAuthenticated) {
   return (
 
     <div className="min-h-screen bg-white text-black py-10 px-6 md:px-20">
@@ -288,5 +294,5 @@ export default function CoordinatorDashboardPage() {
       </div>
     </div>
   )
-}
+}}
 

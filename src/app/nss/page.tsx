@@ -69,12 +69,12 @@ Image
         <div>
           <h2 className='text-2xl  font-semibold text-indigo-500 mb-3'>Photos</h2>
           <div className='flex flex-col p-4 lg:grid lg:grid-row-1 lg:m-0 sm:grid-cols-2 md:grid-cols-3 gap-6'>
-            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="delhitrophy.jpeg" alt="Trophy" />
-            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="corewp.jpeg" alt="Core Team" />
-            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="jnr.jpeg" alt="Junior Volunteers" />
-            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="rangoli.jpeg" alt="Rangoli Event" />
-            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="patelwjnr.jpeg" alt="Patel Event" />
-            <img className='rounded-xl opacity-85 hover:opacity-100 transition' src="news.jpeg" alt="News Coverage" />
+            <img className='rounded-xl  transition' src="delhitrophy.jpeg" alt="Trophy" />
+            <img className='rounded-xl  transition' src="corewp.jpeg" alt="Core Team" />
+            <img className='rounded-xl  transition' src="jnr.jpeg" alt="Junior Volunteers" />
+            <img className='rounded-xl  transition' src="rangoli.jpeg" alt="Rangoli Event" />
+            <img className='rounded-xl  transition' src="patelwjnr.jpeg" alt="Patel Event" />
+            <img className='rounded-xl  transition' src="news.jpeg" alt="News Coverage" />
           
 
           </div>
