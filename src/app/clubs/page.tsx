@@ -71,12 +71,12 @@ export default function Clubpage() {
         {clubs.map((club) => (
           <div
             key={club.id}
-            className="bg-white rounded-2xl border-1 border-gray-300  shadow-lg hover:shadow-xl transition overflow-hidden"
+            className="bg-white rounded-2xl border-1 border-gray-300 shadow-md hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
           >
             <img height={20} width={20}
               src={club.image}
               alt={club.name}
-              className="w-full p-4 object-cover object-center"
+              className="w-full p-4 object-cover  object-center"
             />
 
             <div className="p-6 text-center">

@@ -22,7 +22,7 @@ const Navbar = () => {
 
       <div className='flex md:flex-col justify-between items-center lg:flex-row  gap-4'>
 
-        <img className='rounded-full md:w-20 md:h-20 h-10 w-10 ' src="/sac.jpeg" alt='Logo' />
+        <img className='rounded-full h-10 w-10 ' src="/sac.jpeg" alt='Logo' />
 
         <p className='font-extrabold font-mono text-2xl tracking-widest'>SAC RTU</p>
         <button
@@ -61,7 +61,7 @@ const Navbar = () => {
         <Link className={pathname === "/profile" ? " border-2 rounded-4xl p-1.5  border-white md:border-blue-500" : ""} href={"/profile"}>
 
 
-          <img className='hidden md:block' width={35} height={35} src="/user.png" alt="" />
+          <img className='hidden md:block' width={30} height={30} src="/user.png" alt="" />
 
 
         </Link>

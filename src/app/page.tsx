@@ -26,12 +26,12 @@ export default function HomePage(){
             <div className='flex justify-center gap-8'>
               <button onClick={() => router.push("/clubs")} className='hidden md:flex justify-center gap-4 m-4
                bg-blue-200 md:bg-white text-black rounded-2xl w-45 p-3'>Explore Clubs
-                <img src="right-arrow.png" height={20} width={20} alt="" />
+                <img src="right-arrow.png" className=' hover:scale-120' height={20} width={20} alt="" />
                 
               </button>
               <button onClick={() => router.push("/events")} className='flex gap-4 flex-row  justify-center m-4
                bg-blue-200 md:bg-white text-black rounded-2xl shadow-2xl md:shadow-none w-40 p-3'>See Events
-                <img src="right-arrow.png" height={20} width={20} alt="" />
+                <img src="right-arrow.png" className=' hover:scale-120' height={20} width={20} alt="" />
                
               </button>
             </div>
