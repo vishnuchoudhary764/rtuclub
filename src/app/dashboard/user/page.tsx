@@ -20,17 +20,21 @@ export default function UserDashboardPage() {
   const router = useRouter()
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user")
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser)
-      if (parsedUser.role !== "User") {
+    fetch("/api/me")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => setUser(data?.user || null))
+      .catch(() => setUser(null));
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+     
+      if (user.role !== "User") {
         router.push("/dashboard/coordinator")
       } else {
-        setUser(parsedUser)
+        setUser(user)
       }
-    } else {
-      router.push("/login")
-    }
+    } 
   }, [router])
 
 

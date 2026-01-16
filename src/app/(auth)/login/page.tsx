@@ -1,4 +1,3 @@
-
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -10,7 +9,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
@@ -23,23 +22,16 @@ export default function LoginPage() {
 
       const data = await res.json();
 
-
-      if (res.ok && data.user) {
-        alert("Login successful!");
-
-        localStorage.setItem("user", JSON.stringify(data.user))
-
-        if(data.user.role === "Coordinator") {
-          router.push("/dashboard/coordinator");
-        } else {
-          router.push("/dashboard/user");
-        }
-
-
-
-      } else {
+      if (!res.ok) {
         alert(data.message || "Login failed");
+        return;
       }
+
+      alert("Login successful!");
+      
+
+      router.replace("/dashboard"); 
+
     } catch (error) {
       alert("Network error. Please try again.");
       console.error(error);
@@ -49,9 +41,11 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center mt-15 text-black justify-center ">
-      <div className="md:bg-white p-8  rounded-2xl md:shadow-2xl w-110">
-        <h1 className="text-2xl font-bold text-indigo-500 text-center mb-6">Login</h1>
+    <div className="flex items-center mt-15 text-black justify-center">
+      <div className="md:bg-white p-8 rounded-2xl md:shadow-2xl w-110">
+        <h1 className="text-2xl font-bold text-indigo-500 text-center mb-6">
+          Login
+        </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -61,7 +55,6 @@ export default function LoginPage() {
               className="w-full p-2 border rounded-md"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
               required
             />
           </div>
@@ -73,7 +66,6 @@ export default function LoginPage() {
               className="w-full p-2 border rounded-md"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
               required
             />
           </div>

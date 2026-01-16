@@ -9,14 +9,23 @@ export default function ProfilePage() {
   const [user, setUser] = useState<{ id: number; name: string; email: string; role: string } | null>(null)
   const router = useRouter()
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user")
-    if (storedUser) {
-      setUser(JSON.parse(storedUser))
-    } else {
-      router.push("/login") 
-    }
-  }, [router])
+ useEffect(() => {
+    fetch("/api/me")
+      .then((res) => {
+        if (!res.ok) throw new Error("Unauthorized");
+        return res.json();
+      })
+      .then((data) => setUser(data.user))
+      .catch(() => router.replace("/login"));
+  }, [router]);
+
+   const handleLogout = async () => {
+    await fetch("/api/logout", {
+      method: "POST",
+    });
+
+    router.replace("/login"); 
+  };
 
    if (!user) return  <div className='flex justify-center items-center h-100 '>
       <p className="text-red-500">Redirecting to login...</p>
@@ -57,11 +66,8 @@ export default function ProfilePage() {
 
        
         <button
-          onClick={() => {
-            localStorage.removeItem("user")
-            router.push("/login")
-          }}
-          className="mt-6 w-full flex items-center justify-center gap-2 bg-red-500 text-white py-2 rounded-xl shadow hover:bg-red-600 transition"
+          onClick={handleLogout}
+          className="mt-6 w-full hidden md:flex items-center justify-center gap-2 bg-red-500 text-white py-2 rounded-xl shadow hover:bg-red-600 transition"
         >
           <LogOut className="w-5 h-5" />
           Logout
@@ -70,4 +76,3 @@ export default function ProfilePage() {
     </div>
   )
 }
-

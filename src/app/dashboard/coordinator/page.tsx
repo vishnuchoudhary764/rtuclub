@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Calendar, MapPin, PlusCircle, Edit, Trash2 } from "lucide-react"
-import { json } from "stream/consumers"
 
 type Event = {
   _id: string;
@@ -22,42 +21,41 @@ export default function CoordinatorDashboardPage() {
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({description: "", clubName: "", date: "", location: ""})
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  
-  useEffect(() => {
-   
-    const stored = localStorage.getItem("user");
-    if (stored) {
-      try {
-        const parsedUser = JSON.parse(stored);
-        setUser(parsedUser);
-          if(parsedUser.role === "coordinator") {
-          setIsAuthenticated(true)
-        } else {
-          router.push("/dashboard/user");
-        }
-         setLoading(false)
-      
+useEffect(() => {
+  const loadData = async () => {
+    try {
+      const res = await fetch("/api/me");
 
-        if (parsedUser.name) {
-         
-          fetch(`/api/events?CreatedBy=${encodeURIComponent(parsedUser.name.trim())}`)
-            .then((res) => res.json())
-            .then((data) => {
-              console.log("Fetched events:", data);
-              setEvents(data);
-             
-            })
-            .catch(console.error);
-        }
-      } catch (err) {
-        console.error("Failed to parse user:", err);
+      if (!res.ok) {
+        setUser(null);
+        setLoading(false);
+        return;
       }
-    } else {
-      console.warn("No user found in localStorage");
+
+      const data = await res.json();
+      const loggedUser = data?.user;
+
+      setUser(loggedUser);
+
+      if (loggedUser?.name) {
+        const evRes = await fetch(
+          `/api/events?CreatedBy=${encodeURIComponent(loggedUser.name.trim())}`
+        );
+        const evData = await evRes.json();
+        setEvents(evData);
+      }
+    } catch (err) {
+      console.error(err);
+      setUser(null);
+    } finally {
+      setLoading(false);
     }
-  }, []);
+  };
+
+  loadData();
+}, []);
+
 
   if (loading) return  <div className='flex justify-center items-center h-100 '>
       <img className='bg-transparent'  width={70} src="/loading.svg" alt="loading...." />
@@ -157,7 +155,7 @@ export default function CoordinatorDashboardPage() {
       alert("Failed to delete event");
     }
   };
-if (isAuthenticated) {
+ 
   return (
 
     <div className="min-h-screen bg-white text-black py-10 px-6 md:px-20">
@@ -294,5 +292,6 @@ if (isAuthenticated) {
       </div>
     </div>
   )
-}}
+}
+
 

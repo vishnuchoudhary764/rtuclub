@@ -11,7 +11,7 @@ export default function HomePage(){
   const router = useRouter();
   return (
     <div>
-      <div className='flex justify-center  p-1 h-full '>
+      <div className='flex justify-center p-1 h-full '>
         <div className='flex flex-col md:flex-row justify-center items-center rounded-2xl md:w-230 md:h-100 p-7 text-black lg:bg-blue-500 
           gap-4  lg:text-white m-auto' >
           <div className='flex flex-col gap-5 font-sans overflow-hidden'>
