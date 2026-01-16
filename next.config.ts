@@ -1,9 +1,6 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-
-   eslint: {
-    ignoreDuringBuilds: true, // skips linting when building
+const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
