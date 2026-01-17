@@ -96,7 +96,7 @@ const Navbar = () => {
 
       <aside
         className={`fixed md:hidden top-0 lg:relative z-40 h-screen w-64 bg-white transition-transform duration-300
-        ${isSidebarOpen ? "translate-x-30" : "translate-x-110  lg:translate-x-0"}`}
+        ${isSidebarOpen ? "translate-x-20" : "translate-x-110  lg:translate-x-0"}`}
       >
         <nav className="p-4 mt-18">
           <ul className="space-y-2">
@@ -126,7 +126,7 @@ const Navbar = () => {
         {user && (<div className="absolute text-center bottom-20  w-full p-4 ">
 
           <>
-            <p className="text-sm  font-semibold">{user.name}</p>
+            <p className="text-sm text-gray-500  font-semibold">{user.name}</p>
             <p className="text-xs text-gray-500 mb-3">{user.email}</p>
 
             <button
