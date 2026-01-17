@@ -269,8 +269,8 @@ export default function CoordinatorDashboardPage() {
 
                 <h3 className="text-lg font-semibold ">{ev.description}</h3>
                 <p className="text-sm ">{ev.clubName}</p>
-                <p className="flex items-center gap- text-sm">
-                  <Calendar className="w-4 h-4" />
+                <p className="flex items-center gap-1 text-sm">
+                  <Calendar className="w-4 h-4 " />
                   {new Date(ev.date).toDateString()}
                 </p>
                 <p className="flex items-center gap-1 text-sm ">

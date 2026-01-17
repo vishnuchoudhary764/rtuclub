@@ -43,7 +43,7 @@ export async function POST(req: Request) {
     }
     const newEvent = new Event({ description, clubName, date, location, CreatedBy });
     await newEvent.save();
-    return NextResponse.json(newEvent, { status: 201 });
+    return NextResponse.json({newEvent , message: "Event Added successfully" }, { status: 200 });
   } catch (err) {
     console.error(err);
     return NextResponse.json({ error: "Failed to create event" }, { status: 500 });
