@@ -28,13 +28,13 @@ export default function ProfilePage() {
   };
 
    if (!user) return  <div className='flex justify-center items-center h-100 '>
-      <p className="text-red-500">Redirecting to login...</p>
+      <h1 className="text-red-500 text-xl">Redirecting to login...</h1>
     </div>
 
 
   return (
     <div className="p-7 flex items-center justify-center ">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-200 p-6">
+      <div className="w-full max-w-md bg-white rounded-2xl  border border-gray-200 p-6">
       
         <div className="flex items-center gap-4 mb-6">
           <img
@@ -67,10 +67,11 @@ export default function ProfilePage() {
        
         <button
           onClick={handleLogout}
-          className="mt-6 w-full hidden md:flex items-center justify-center gap-2 bg-red-500 text-white py-2 rounded-xl shadow hover:bg-red-600 transition"
+          className="mt-6 px-8 w-full flex items-center justify-center gap-2 bg-red-500 text-white py-2 rounded-xl shadow hover:bg-red-600 transition"
         >
-          <LogOut className="w-5 h-5" />
-          Logout
+          {/* Logout */}
+          <LogOut className="w-5 h-5 transition-transform hover:translate-x-1" />
+          
         </button>
       </div>
     </div>

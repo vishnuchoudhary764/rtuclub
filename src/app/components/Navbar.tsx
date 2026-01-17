@@ -56,50 +56,47 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-evenly flex-col lg:flex-row p-5 gap-6 md:gap-0 mb-5 text-white md:text-black bg-blue-400 md:bg-white">
-      
-      <div className="flex md:flex-col justify-between items-center  gap-5 lg:flex-row">
-        <img className="rounded-full md:h-15 md:w-15 h-10 w-10" src="/sac.jpeg" alt="Logo" />
-        <p className="font-extrabold font-mono text-2xl tracking-widest">
-          SAC RTU
-        </p>
+    <div className="flex sticky z-1000 top-0 justify-evenly flex-col lg:flex-row gap-6 md:gap-0 mb-1 bg-blue-500 text-white md:text-black  md:bg-white/1 md:backdrop-blur-sm shadow-sm ">
 
-        <button
-          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-          className="lg:hidden fixed bg-white/80 backdrop-blur-md shadow-sm z-50 inline-block rounded-4xl bottom-4 right-4  p-3"
-        >
-          {isSidebarOpen ? <X className="text-red-500 " /> : <Menu className="text-blue-500" />}
-        </button>
+      <div className="flex  md:flex-col justify-center px-10 items-center  gap-5 lg:flex-row">
+
+        <img className="rounded-full md:h-20 md:w-20 h-20 w-20 brightness-0 invert md:invert-0" src="image1.png" alt="Logo" />
+
+
+
       </div>
 
-    
+      <button
+        onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        className="lg:hidden fixed bg-white/80 backdrop-blur-md shadow-sm z-50 inline-block rounded-4xl bottom-4 right-4  p-3"
+      >
+        {isSidebarOpen ? <X className="text-red-500 " /> : <Menu className="text-blue-500" />}
+      </button>
+
       <ul className="hidden md:flex text-xl items-center gap-10">
         <Link href="/" className={pathname === "/" ? "font-bold text-blue-500" : ""}>Home</Link>
         <Link href="/clubs" className={pathname === "/clubs" ? "font-bold text-blue-500" : ""}>Clubs</Link>
         <Link href="/events" className={pathname === "/events" ? "font-bold text-blue-500" : ""}>Events</Link>
+        <Link href="/dashboard" className={pathname === "/dashboard/coordinator" ? "font-bold text-blue-500" : pathname === "/dashboard/user" ? "font-bold text-blue-500" : ""}>Dashboard</Link>
 
-        {user && (
-          <Link href="/dashboard" className="hover:text-blue-600">
-            Dashboard
-          </Link>
-        )}
+        <Link href="/profile" className={pathname === "/profile" ? "font-bold text-blue-500" : ""}> <User /></Link>
 
-        <Link href="/profile">
-          <img className="hidden md:block" width={30} height={30} src="/user.png" alt="profile" />
-        </Link>
+
+
+
       </ul>
 
-      
+
       {isSidebarOpen && (
         <div
-          className="lg:hidden fixed inset-0 bg-black/20 z-30"
+          className="lg:hidden fixed inset-0 bg-white/10 backdrop-blur-md z-30"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       <aside
         className={`fixed md:hidden top-0 lg:relative z-40 h-screen w-64 bg-white transition-transform duration-300
-        ${isSidebarOpen ? "translate-x-40" : "translate-x-110  lg:translate-x-0"}`}
+        ${isSidebarOpen ? "translate-x-30" : "translate-x-110  lg:translate-x-0"}`}
       >
         <nav className="p-4 mt-18">
           <ul className="space-y-2">

@@ -1,7 +1,8 @@
+import Link from "next/link";
 export default function page() {
   return (
-    <div className="min-h-screen bg-gray-50 flex justify-center items-center p-6">
-      <div className="max-w-4xl w-full bg-white shadow-xl rounded-2xl p-8 space-y-6">
+    <div className="min-h-screen bg-gray-50 flex justify-center items-center ">
+      <div className="max-w-4xl w-full  rounded-2xl p-5 space-y-6">
        
         <h1 className="text-3xl font-bold text-center text-indigo-600">
           The Wordsworth Club

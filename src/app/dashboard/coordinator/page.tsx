@@ -20,46 +20,46 @@ export default function CoordinatorDashboardPage() {
   const router = useRouter()
   const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({description: "", clubName: "", date: "", location: ""})
+  const [form, setForm] = useState({ description: "", clubName: "", date: "", location: "" })
 
-useEffect(() => {
-  const loadData = async () => {
-    try {
-      const res = await fetch("/api/me");
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const res = await fetch("/api/me");
 
-      if (!res.ok) {
+        if (!res.ok) {
+          setUser(null);
+          setLoading(false);
+          return;
+        }
+
+        const data = await res.json();
+        const loggedUser = data?.user;
+
+        setUser(loggedUser);
+
+        if (loggedUser?.name) {
+          const evRes = await fetch(
+            `/api/events?CreatedBy=${encodeURIComponent(loggedUser.name.trim())}`
+          );
+          const evData = await evRes.json();
+          setEvents(evData);
+        }
+      } catch (err) {
+        console.error(err);
         setUser(null);
+      } finally {
         setLoading(false);
-        return;
       }
+    };
 
-      const data = await res.json();
-      const loggedUser = data?.user;
-
-      setUser(loggedUser);
-
-      if (loggedUser?.name) {
-        const evRes = await fetch(
-          `/api/events?CreatedBy=${encodeURIComponent(loggedUser.name.trim())}`
-        );
-        const evData = await evRes.json();
-        setEvents(evData);
-      }
-    } catch (err) {
-      console.error(err);
-      setUser(null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  loadData();
-}, []);
+    loadData();
+  }, []);
 
 
-  if (loading) return  <div className='flex justify-center items-center h-100 '>
-      <img className='bg-transparent'  width={70} src="/loading.svg" alt="loading...." />
-    </div>
+  if (loading) return <div className='flex justify-center items-center h-100 '>
+    <img className='bg-transparent' width={70} src="/loading.svg" alt="loading...." />
+  </div>
 
   const handleEditClick = (ev: Event) => {
     setEditingEvent(ev);
@@ -70,13 +70,13 @@ useEffect(() => {
       date: ev.date.toString().slice(0, 10),
       location: ev.location,
       // CreatedBy:ev.CreatedBy,
-    
+
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
 
     if (!user) return alert("You must be logged in");
 
@@ -86,25 +86,25 @@ useEffect(() => {
       res = await fetch("/api/events", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: editingEvent._id, ...form}),
-        
-        
+        body: JSON.stringify({ id: editingEvent._id, ...form }),
+
+
       });
     } else {
-         
+
       res = await fetch("/api/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form,CreatedBy:user.name }),
-      
+        body: JSON.stringify({ ...form, CreatedBy: user.name }),
+
       });
     }
 
     const data = await res.json();
-    
+
     alert(data.message || data.error);
-   
-   
+
+
 
     if (res.ok) {
 
@@ -119,7 +119,7 @@ useEffect(() => {
                 location: form.location,
                 CreatedBy: user.name,
                 date: new Date(),
-                
+
               }
               : ev
           )
@@ -128,14 +128,14 @@ useEffect(() => {
       } else {
         setEvents([...events, data]);
       }
-      setForm({ description: "", clubName: "", date: "", location: ""});
+      setForm({ description: "", clubName: "", date: "", location: "" });
       setShowForm(false);
     }
   };
 
-  if (!user) return  <div className='flex justify-center h-100 '>
-      <img className='bg-transparent'  width={70} src="loading.svg" alt="loading...." />
-    </div>
+  if (!user) return <div className='flex justify-center h-100 '>
+    <img className='bg-transparent' width={70} src="loading.svg" alt="loading...." />
+  </div>
 
 
   const handleDelete = async (id: string) => {
@@ -155,7 +155,7 @@ useEffect(() => {
       alert("Failed to delete event");
     }
   };
- 
+
   return (
 
     <div className="min-h-screen bg-white text-black py-10 px-6 md:px-20">
@@ -165,28 +165,35 @@ useEffect(() => {
           <p className="md:text-3xl text-2xl text-black font-bold"> Coordinator Dashboard</p>
           <p className="text-blue-500">Welcome back, {user.name}!</p>
         </div>
-</div>
+      </div>
       {showForm && (
-        <div className=" md:w-170 p-7 m-7  md:mt-15 bg-blue-100 rounded-xl shadow-sm border border-gray-200 
+        <div
+          className=" fixed inset-0 bg-white/10 backdrop-blur-md z-30"
+          onClick={() => setShowForm(false)}
+        />
+      )}
+      {showForm && (
+
+        <div className=" md:w-170 p-7 m-7  z-40  md:mt-15 bg-white/80 rounded-xl shadow-sm border border-gray-200 
          transition fixed left-0 right-0 top-60 md:top-20 md:left-70">
           <h2 className="text-2xl font-bold mb-4 text-center text-blue-500">Add New Event</h2>
           <form onSubmit={(e) => {
             e.preventDefault();
             handleSubmit(e);
             setShowForm(false);
-          }} className="space-y-4 text-blue-500">
+          }} className="space-y-4 text-blue-600">
             <input
 
               type="text"
               placeholder="Description"
-              className="w-full shadow-lg bg-white duration-100 outline-none  p-2 rounded-xl "
+              className="w-full border border-dashed bg-white duration-100 outline-none  p-2 rounded-xl "
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               required
             />
             <input
               placeholder="clubName"
-              className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl"
+              className="w-full border  border-dashed  bg-white duration-100 outline-none  p-2 rounded-xl"
               value={form.clubName}
               onChange={(e) =>
                 setForm({ ...form, clubName: e.target.value })
@@ -195,40 +202,42 @@ useEffect(() => {
             />
             <input
               type="date"
-              className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl "
+              className="w-full border  border-dashed bg-white duration-100 outline-none  p-2 rounded-xl "
               value={form.date}
-              onChange={(e) => setForm({ ...form, date: e.target.value  })}
+              onChange={(e) => setForm({ ...form, date: e.target.value })}
               required
             />
             <input
               type="text"
               placeholder="Location"
-              className="w-full shadow-lg  bg-white duration-100 outline-none  p-2 rounded-xl "
+              className="w-full border   border-dashed bg-white duration-100 outline-none  p-2 rounded-xl "
               value={form.location}
               onChange={(e) => setForm({ ...form, location: e.target.value })}
               required
             />
-           
-            <div className="flex md:justify-between gap-10 px-10">
+
+            <div className="flex justify-between px-10">
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="bg-white shadow-lg text-black px-2 md:py-2 rounded-lg hover:bg-gray-600"
+                className="bg-white shadow-lg text-black px-2 md:py-2 rounded-lg hover:text-white hover:bg-red-600"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-3 py-2 w-24 shadow-lg text-white rounded-lg bg-blue-500 hover:bg-blue-600 flex items-center gap-1 text-sm"
+                className="px-5 py-1 shadow-lg text-white rounded-lg bg-blue-500 hover:bg-blue-600 focus:bg-green-500"
 
               >
-                Add Event
+                Add
               </button>
 
             </div>
 
           </form>
         </div>
+
+
       )}
 
 
@@ -236,26 +245,26 @@ useEffect(() => {
 
       <div className="max-w-5xl mx-auto  text-black">
         <div className="flex justify-between items-center m-4  ">
-            <p className="text-xl font-semibold text-center text-indigo-500">My Events</p>
-        {!showForm && (  
-          <button
-          onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 scale-80 bg-green-600 text-white px-4 py-2 rounded-xl shadow
+          <p className="text-xl font-semibold text-center text-indigo-500">My Events</p>
+          {!showForm && (
+            <button
+              onClick={() => setShowForm(true)}
+              className="flex items-center gap-2 scale-80 bg-green-600 text-white px-4 py-2 rounded-xl shadow
            hover:bg-green-700 transition"
-        >
-          <PlusCircle className="w-5 h-5" />
-          Add 
-        </button>
-        )}
+            >
+              <PlusCircle className="w-5 h-5" />
+              Add
+            </button>
+          )}
         </div>
-      
+
         {events.length > 0 ? (
           <div className="space-y-4">
             {events.map((ev) => (
               <div
                 key={ev._id}
-                className="p-6 bg-white rounded-xl space-y-1 shadow-sm border border-gray-200 hover:shadow-lg transition
-                 grid grid-cols-1  md:grid-cols-5  gap-1 items-center"
+                className="p-6 bg-white rounded-xl space-y-1 shadow-sm border border-gray-200 hover:shadow-lg 
+                 grid grid-cols-1  md:grid-cols-5  gap-1 items-center  hover:scale-105 transition-all duration-300 cursor-pointer"
               >
 
                 <h3 className="text-lg font-semibold ">{ev.description}</h3>
@@ -268,7 +277,7 @@ useEffect(() => {
                   <MapPin className="w-4 h-4" />
                   {ev.location}
                 </p>
-               
+
                 <div className="flex gap-4 justify-start">
                   <button
                     onClick={() => handleEditClick(ev)}

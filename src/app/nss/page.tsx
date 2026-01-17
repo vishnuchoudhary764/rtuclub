@@ -3,13 +3,12 @@ import Image from 'next/image'
 
 const page = () => {
   return (
-    <div className='min-h-screen bg-gray-50 flex justify-center items-center p-6'>
-      <div className='flex flex-col w-full max-w-4xl m-auto gap-7 bg-white p-10 rounded-2xl shadow-xl'>
+    <div className='min-h-screen bg-gray-50 flex justify-center items-center p-2'>
+      <div className='flex flex-col w-full max-w-4xl m-auto gap-7 p-10 rounded-2xl '>
       
-        <h1 className='text-3xl font-bold text-center text-indigo-600'>About NSS</h1>
+        <h1 className='text-2xl font-bold text-center text-indigo-600'>National Service Scheme (NSS)</h1>
 
       
-        <p className='font-semibold text-lg text-gray-800'>National Service Scheme (NSS)</p>
         <p className='text-gray-700 leading-relaxed text-justify'>
           The National Service Scheme (NSS) is a student-led community service initiative that aims to develop a sense
           of social responsibility, leadership, and empathy among youth. At our college, the NSS Club organizes activities

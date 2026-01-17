@@ -7,6 +7,7 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -41,9 +42,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center mt-15 text-black justify-center">
-      <div className="md:bg-white p-8 rounded-2xl md:shadow-2xl w-110">
-        <h1 className="text-2xl font-bold text-indigo-500 text-center mb-6">
+    <div className="flex items-center mt-15 p-5  text-black justify-center ">
+      
+      <div className="md:bg-white p-8 border border-gray-200 shadow-sm rounded-2xl  w-110  ">
+        <h1 className="text-2xl font-bold text-blue-500 text-center mb-6">
           Login
         </h1>
 

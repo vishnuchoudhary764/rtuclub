@@ -44,9 +44,8 @@ export default function EventsPage() {
     </div>
 
   return (
-    <div className=" p-8 md:px-25  m-auto">
+    <div className=" px-8 md:px-25 ">
       <div className="flex items-center justify-center pb-10 gap-4">
-        <h1 className="text-2xl font-bold text-indigo-400 text-center"> Upcoming Events</h1>
 
       
       </div>
@@ -55,7 +54,7 @@ export default function EventsPage() {
         {events.length > 0 ? (
           events.map((ev) => (
             <div key={ev._id} className="p-6 px-11 space-y-1  bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg
-             transition grid grid-cols-1 md:grid-cols-6 gap-1 items-center  ">
+              grid grid-cols-1 md:grid-cols-6 gap-1 items-center  hover:scale-105 transition-all duration-300 cursor-pointer ">
               <h2 className="text-xl text-indigo-500 font-semibold">{ev.description}</h2>
               <p className="text-black">{ev.clubName}</p>
               <p className="flex items-center text-gray-700 text-sm  gap-2">

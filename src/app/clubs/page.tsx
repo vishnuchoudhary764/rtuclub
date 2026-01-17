@@ -65,7 +65,6 @@ export default function Clubpage() {
 
   return (
     <div className="min-h-screen bg-white p-6 ">
-      <h1 className="text-3xl text-indigo-500 font-bold text-center mb-10">Our Clubs</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
         {clubs.map((club) => (

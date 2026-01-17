@@ -1,10 +1,10 @@
 export default function page() {
   return (
-    <div className="min-h-screen  flex justify-center items-center p-6">
-      <div className="max-w-4xl w-full bg-white shadow-2xl rounded-2xl p-8 space-y-6">
+    <div className="min-h-screen  flex justify-center items-center p-2">
+      <div className="max-w-4xl w-full rounded-2xl p-8 space-y-6">
         
         <h1 className="text-3xl font-bold text-center text-indigo-500">
-          Music Club RTU
+          Music Club 
         </h1>
 
         

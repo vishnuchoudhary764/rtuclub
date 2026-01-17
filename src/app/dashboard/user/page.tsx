@@ -45,7 +45,7 @@ export default function UserDashboardPage() {
       .then((data) => setEvents(data))
   }, [])
 
-  if (!user) return <p className="p-6 ">Loading...</p>
+  if (!user) return <h1 className="p-6 m-auto  text-xl h-screen w-full">Loading...</h1>
 
   return (
     <div className="min-h-scree text-black py-10 px-6 md:px-20">
@@ -74,7 +74,7 @@ export default function UserDashboardPage() {
               <div
                 key={ev._id}
                 className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-lg 
-                transition grid grid-cols-1 md:grid-cols-2 gap-3 items-center "
+                 grid grid-cols-1 md:grid-cols-2 gap-3 items-center hover:scale-105 transition-all duration-300 cursor-pointer "
               >
 
                 <h3 className="text-lg font-semibold text-indigo-500">{ev.description}</h3>
